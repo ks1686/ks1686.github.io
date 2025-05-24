@@ -63,7 +63,7 @@
             border-radius: 8px; /* Tailwind rounded-lg */
             padding: 1.5rem; /* Tailwind p-6 */
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.07); /* Tailwind shadow-md */
-            transition: box-shadow 0.3s ease-in-out;
+            transition: box-shadow 0.3s ease-in-out, opacity 0.5s ease-out, transform 0.5s ease-out; /* Added opacity and transform transitions */
         }
         .repo-card:hover {
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1); /* Tailwind shadow-xl */
@@ -84,6 +84,17 @@
             color: #6b7280; /* Tailwind gray-500 */
             margin-top: 0.5rem; /* mt-2 */
         }
+
+        /* Animation states for repo cards */
+        .repo-card-hidden {
+            opacity: 0;
+            transform: translateY(30px); /* Start slightly lower */
+        }
+        .repo-card-visible {
+            opacity: 1;
+            transform: translateY(0); /* End at original position */
+        }
+
 
         /* Message styling for loading/error */
         .message-feedback {
@@ -151,10 +162,29 @@
     <script>
         const githubUsername = "ks1686"; // Your GitHub username
 
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            root: null, // Use the viewport as the root
+            rootMargin: '0px',
+            threshold: 0.1 // Trigger when 10% of the item is visible
+        };
+
+        const observerCallback = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.remove('repo-card-hidden');
+                    entry.target.classList.add('repo-card-visible');
+                    observer.unobserve(entry.target); // Stop observing once visible
+                }
+            });
+        };
+
+        const repoObserver = new IntersectionObserver(observerCallback, observerOptions);
+
         async function fetchGitHubRepos(username) {
             const reposContainer = document.getElementById('repos-container');
             const loadingMessage = document.getElementById('repos-loading-message');
-            const apiUrl = `https://api.github.com/users/${username}/repos?sort=updated&direction=desc&per_page=6`; // Fetch top 6 updated repos
+            const apiUrl = `https://api.github.com/users/${username}/repos?sort=updated&direction=desc&per_page=100`; 
 
             try {
                 const response = await fetch(apiUrl);
@@ -164,9 +194,9 @@
                 const repos = await response.json();
 
                 if (loadingMessage) {
-                    loadingMessage.remove(); // Remove loading message
+                    loadingMessage.remove(); 
                 }
-                reposContainer.innerHTML = ''; // Clear any previous content if any (though loading message handles this)
+                reposContainer.innerHTML = ''; 
 
                 if (repos.length === 0) {
                     reposContainer.innerHTML = '<p class="message-feedback message-info col-span-full">No public repositories found for this user.</p>';
@@ -175,7 +205,8 @@
 
                 repos.forEach(repo => {
                     const repoDiv = document.createElement('div');
-                    repoDiv.className = 'repo-card flex flex-col justify-between'; // Added flex for content alignment
+                    // Add base class and initial hidden state for animation
+                    repoDiv.className = 'repo-card repo-card-hidden flex flex-col justify-between'; 
 
                     const repoNameLink = document.createElement('a');
                     repoNameLink.href = repo.html_url;
@@ -184,32 +215,31 @@
                     repoNameLink.textContent = repo.name;
 
                     const repoNameHeader = document.createElement('h3');
-                    repoNameHeader.className = 'text-lg font-semibold mb-2'; // Tailwind classes for heading
+                    repoNameHeader.className = 'text-lg font-semibold mb-2'; 
                     repoNameHeader.appendChild(repoNameLink);
 
                     const repoDescription = document.createElement('p');
-                    repoDescription.className = 'text-sm mb-3 flex-grow'; // flex-grow to push language to bottom
+                    repoDescription.className = 'text-sm mb-3 flex-grow'; 
                     repoDescription.textContent = repo.description || 'No description provided.';
 
                     const repoLanguage = document.createElement('p');
-                    repoLanguage.className = 'repo-language'; // Custom class for specific styling
+                    repoLanguage.className = 'repo-language'; 
                     repoLanguage.innerHTML = `<strong>Language:</strong> ${repo.language || 'N/A'}`;
                     
                     const repoStars = document.createElement('p');
                     repoStars.className = 'text-xs text-gray-500 mt-1';
                     repoStars.innerHTML = `⭐ Stars: ${repo.stargazers_count} | 🍴 Forks: ${repo.forks_count}`;
 
-
                     repoDiv.appendChild(repoNameHeader);
                     repoDiv.appendChild(repoDescription);
-                    // Group language and stars
+                    
                     const footerDiv = document.createElement('div');
                     footerDiv.appendChild(repoLanguage);
                     footerDiv.appendChild(repoStars);
                     repoDiv.appendChild(footerDiv);
 
-
                     reposContainer.appendChild(repoDiv);
+                    repoObserver.observe(repoDiv); // Start observing the new card
                 });
 
             } catch (error) {
