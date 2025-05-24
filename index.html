@@ -150,28 +150,22 @@
 <body>
     <div class="container">
         <header>
-            <!-- TODO: Update Your Name -->
             <h1>Karim Smires</h1>
-            <!-- TODO: Update Your Title -->
             <h2>Rutgers New Brunswick, School of Engineering New Grad</h2>
         </header>
 
         <section id="contact-info">
             <h2>Contact Information</h2>
             <ul>
-                <!-- TODO: Update Your Email -->
                 <li>Email: <a href="mailto:[your.email@example.com]">k.smires1686@gmail.com</a></li>
-                <!-- TODO: Update Your LinkedIn Profile URL -->
                 <li>LinkedIn: <a href="[Your LinkedIn Profile URL]" target="_blank">https://www.linkedin.com/in/karim-smires/</a></li>
-                <!-- TODO: Update Your GitHub Profile URL -->
                 <li>GitHub: <a href="[Your GitHub Profile URL]" target="_blank">https://github.com/ks1686</a></li>
             </ul>
         </section>
 
         <section id="summary">
             <h2>Summary</h2>
-            <!-- TODO: Update Your Bio -->
-            <p>[Your Bio Here]</p>
+            <p>Highly motivated and results-oriented New Graduate from Rutgers University - New Brunswick, School of Engineering, with a strong foundation in software development and electrical engineering. Eager to apply acquired knowledge and problem-solving skills to contribute to innovative projects and grow within a dynamic engineering environment. Possesses a passion for learning new technologies and a proven ability to collaborate effectively in team settings, as demonstrated through various academic and personal projects.</p>
         </section>
 
         <section id="github-repositories">
@@ -186,99 +180,6 @@
         // TODO: Replace "YOUR_GITHUB_USERNAME_HERE" with your actual GitHub username.
         // This username will be used to fetch and display your repositories from GitHub.
         const githubUsername = "ks1686";
-
-        async function fetchGitHubRepos(username) {
-    const reposContainer = document.getElementById('repos-container');
-    const apiUrl = `https://api.github.com/users/${username}/repos?sort=updated&direction=desc`;
-
-    try {
-        const response = await fetch(apiUrl);
-        if (!response.ok) {
-            throw new Error(`GitHub API error: ${response.status} ${response.statusText}`);
-        }
-        const repos = await response.json();
-
-        reposContainer.innerHTML = ''; // Clear "Loading..." or previous content
-
-        if (repos.length === 0) {
-            reposContainer.innerHTML = '<p>No repositories found for this user.</p>';
-            return;
-        }
-
-        repos.forEach(repo => {
-            const repoDiv = document.createElement('div');
-            repoDiv.className = 'repo'; // For potential future styling
-
-            const repoNameLink = document.createElement('a');
-            repoNameLink.href = repo.html_url;
-            repoNameLink.target = '_blank';
-            repoNameLink.textContent = repo.name;
-
-            const repoNameHeader = document.createElement('h3');
-            repoNameHeader.appendChild(repoNameLink);
-
-            const repoDescription = document.createElement('p');
-            repoDescription.textContent = repo.description || 'No description provided.';
-
-            const repoLanguage = document.createElement('p');
-            repoLanguage.textContent = `Language: ${repo.language || 'N/A'}`;
-
-            repoDiv.appendChild(repoNameHeader);
-            repoDiv.appendChild(repoDescription);
-            repoDiv.appendChild(repoLanguage);
-
-            reposContainer.appendChild(repoDiv);
-        });
-
-    } catch (error) {
-        console.error('Error fetching GitHub repositories:', error);
-        reposContainer.innerHTML = `<p>Error loading repositories: ${error.message}. Please check the username and your internet connection.</p>`;
-    }
-}
-
-// Call the function when the page loads
-window.onload = () => {
-    if (githubUsername === "YOUR_GITHUB_USERNAME_HERE") {
-        const reposContainer = document.getElementById('repos-container');
-        reposContainer.innerHTML = '<p>Please update the <code>githubUsername</code> variable in the script with your GitHub username to see your repositories.</p>';
-    } else {
-        fetchGitHubRepos(githubUsername);
-    }
-};
-    </script>
-</body>
-</html>
-    <div class="container">
-        <header>
-            <h1>[Your Name]</h1>
-        <h2>[Your Title]</h2>
-    </header>
-
-    <section id="contact-info">
-        <h2>Contact Information</h2>
-        <ul>
-            <li>Email: [Your Email]</li>
-            <li>LinkedIn: [Your LinkedIn Profile URL]</li>
-            <li>GitHub: [Your GitHub Profile URL]</li>
-        </ul>
-    </section>
-
-    <section id="summary">
-        <h2>Summary</h2>
-        <p>[Your Bio]</p>
-    </section>
-
-    <section id="github-repositories">
-        <h2>GitHub Repositories</h2>
-        <div id="repos-container">
-            <p>Loading repositories...</p>
-        </div>
-    </section>
-    </div>
-
-    <script>
-        // TODO: Replace "YOUR_GITHUB_USERNAME_HERE" with your actual GitHub username
-        const githubUsername = "YOUR_GITHUB_USERNAME_HERE";
 
         async function fetchGitHubRepos(username) {
             const reposContainer = document.getElementById('repos-container');
