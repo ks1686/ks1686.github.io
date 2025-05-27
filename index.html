@@ -161,6 +161,7 @@
 
     <script>
         const githubUsername = "ks1686"; // Your GitHub username
+        const reposToExclude = ["ks1686.github.io", "ks1686"]; // Add repository names to exclude here
 
         // Intersection Observer for scroll animations
         const observerOptions = {
@@ -184,29 +185,32 @@
         async function fetchGitHubRepos(username) {
             const reposContainer = document.getElementById('repos-container');
             const loadingMessage = document.getElementById('repos-loading-message');
-            const apiUrl = `https://api.github.com/users/${username}/repos?sort=updated&direction=desc&per_page=100`; 
+            const apiUrl = `https://api.github.com/users/${username}/repos?sort=updated&direction=desc&per_page=100`;
 
             try {
                 const response = await fetch(apiUrl);
                 if (!response.ok) {
                     throw new Error(`GitHub API error: ${response.status} ${response.statusText}`);
                 }
-                const repos = await response.json();
+                let repos = await response.json();
+
+                // Filter out specified repositories
+                repos = repos.filter(repo => !reposToExclude.includes(repo.name));
 
                 if (loadingMessage) {
-                    loadingMessage.remove(); 
+                    loadingMessage.remove();
                 }
-                reposContainer.innerHTML = ''; 
+                reposContainer.innerHTML = '';
 
                 if (repos.length === 0) {
-                    reposContainer.innerHTML = '<p class="message-feedback message-info col-span-full">No public repositories found for this user.</p>';
+                    reposContainer.innerHTML = '<p class="message-feedback message-info col-span-full">No public repositories found for this user (after filtering).</p>';
                     return;
                 }
 
                 repos.forEach(repo => {
                     const repoDiv = document.createElement('div');
                     // Add base class and initial hidden state for animation
-                    repoDiv.className = 'repo-card repo-card-hidden flex flex-col justify-between'; 
+                    repoDiv.className = 'repo-card repo-card-hidden flex flex-col justify-between';
 
                     const repoNameLink = document.createElement('a');
                     repoNameLink.href = repo.html_url;
@@ -215,15 +219,15 @@
                     repoNameLink.textContent = repo.name;
 
                     const repoNameHeader = document.createElement('h3');
-                    repoNameHeader.className = 'text-lg font-semibold mb-2'; 
+                    repoNameHeader.className = 'text-lg font-semibold mb-2';
                     repoNameHeader.appendChild(repoNameLink);
 
                     const repoDescription = document.createElement('p');
-                    repoDescription.className = 'text-sm mb-3 flex-grow'; 
+                    repoDescription.className = 'text-sm mb-3 flex-grow';
                     repoDescription.textContent = repo.description || 'No description provided.';
 
                     const repoLanguage = document.createElement('p');
-                    repoLanguage.className = 'repo-language'; 
+                    repoLanguage.className = 'repo-language';
                     repoLanguage.innerHTML = `<strong>Language:</strong> ${repo.language || 'N/A'}`;
                     
                     const repoStars = document.createElement('p');
