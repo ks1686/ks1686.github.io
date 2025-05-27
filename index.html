@@ -1,269 +1,238 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Resume - Material Design</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        /* Custom base styles */
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f3f4f6; /* Light gray background (Tailwind gray-100) */
-            color: #1f2937; /* Dark gray text (Tailwind gray-800) */
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Resume - Karim Smires</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Hack&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Hack', monospace;
+      background-color: #1e1e2e; /* Mocha Base */
+      color: #cdd6f4; /* Text */
+    }
 
-        /* Custom styles for links to make them more prominent */
-        .custom-link {
-            color: #4f46e5; /* Indigo-600 for primary actions/links */
-            font-weight: 500;
-        }
-        .custom-link:hover {
-            color: #3730a3; /* Indigo-700 for hover */
-            text-decoration: underline;
-        }
+    .custom-link {
+      color: #89b4fa; /* Blue */
+      font-weight: 500;
+    }
+    .custom-link:hover {
+      color: #74c7ec; /* Lighter Blue */
+      text-decoration: underline;
+    }
 
-        /* Style for section titles */
-        .section-title {
-            color: #111827; /* Tailwind gray-900 */
-            border-bottom: 2px solid #6366f1; /* Indigo-500 */
-            padding-bottom: 8px; /* Corresponds to pb-2 in Tailwind */
-            margin-top: 32px; /* Corresponds to mt-8 in Tailwind */
-            font-size: 1.5em; /* Corresponds to text-2xl */
-            font-weight: 600; /* Corresponds to font-semibold */
-        }
+    .section-title {
+      color: #f5e0dc; /* Rosewater */
+      border-bottom: 2px solid #b4befe; /* Lavender */
+      padding-bottom: 8px;
+      margin-top: 32px;
+      font-size: 1.5em;
+      font-weight: 600;
+    }
 
-        /* Styling for the header */
-        .resume-header {
-            background-color: #312e81; /* Deep Indigo (Tailwind indigo-800) */
-            color: #e0e7ff; /* Light Indigo text (Tailwind indigo-100) */
-            padding-top: 2rem; /* py-8 */
-            padding-bottom: 2rem; /* py-8 */
-            text-align: center;
-            margin-bottom: 2rem; /* mb-8 */
-            border-radius: 0 0 12px 12px; /* Rounded bottom corners */
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Subtle shadow */
-        }
-        .resume-header h1 {
-            font-size: 2.25rem; /* text-4xl */
-            font-weight: 700; /* font-bold */
-            color: #ffffff; /* White */
-        }
-        .resume-header h2 {
-            font-size: 1.25rem; /* text-xl */
-            font-weight: 400; /* font-normal */
-            color: #c7d2fe; /* Lighter Indigo text (Tailwind indigo-200) */
-        }
+    .resume-header {
+      background-color: #45475a; /* Surface0 */
+      color: #cdd6f4;
+      padding: 2rem 0;
+      text-align: center;
+      margin-bottom: 2rem;
+      border-radius: 0 0 12px 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+    .resume-header h1 {
+      font-size: 2.25rem;
+      font-weight: 700;
+      color: #f5c2e7; /* Pink */
+    }
+    .resume-header h2 {
+      font-size: 1.25rem;
+      font-weight: 400;
+      color: #bac2de; /* Subtext1 */
+    }
 
-        /* Styling for repository cards */
-        .repo-card {
-            background-color: #ffffff; /* White background */
-            border: 1px solid #e5e7eb; /* Tailwind gray-200 */
-            border-radius: 8px; /* Tailwind rounded-lg */
-            padding: 1.5rem; /* Tailwind p-6 */
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.07); /* Tailwind shadow-md */
-            transition: box-shadow 0.3s ease-in-out, opacity 0.5s ease-out, transform 0.5s ease-out; /* Added opacity and transform transitions */
-        }
-        .repo-card:hover {
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1); /* Tailwind shadow-xl */
-        }
-        .repo-card h3 a {
-            color: #3730a3; /* Indigo-700 */
-            font-weight: 600;
-        }
-        .repo-card h3 a:hover {
-            text-decoration: underline;
-        }
-        .repo-card p {
-            font-size: 0.9em;
-            color: #4b5563; /* Tailwind gray-600 */
-        }
-        .repo-card .repo-language {
-            font-size: 0.8em;
-            color: #6b7280; /* Tailwind gray-500 */
-            margin-top: 0.5rem; /* mt-2 */
-        }
+    .repo-card {
+      background-color: #313244; /* Surface1 */
+      border: 1px solid #585b70; /* Overlay1 */
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+      transition: all 0.3s ease-in-out;
+    }
+    .repo-card:hover {
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.35);
+    }
+    .repo-card h3 a {
+      color: #89b4fa;
+      font-weight: 600;
+    }
+    .repo-card h3 a:hover {
+      text-decoration: underline;
+    }
+    .repo-card p {
+      font-size: 0.9em;
+      color: #a6adc8;
+    }
+    .repo-language {
+      font-size: 0.8em;
+      color: #9399b2;
+      margin-top: 0.5rem;
+    }
 
-        /* Animation states for repo cards */
-        .repo-card-hidden {
-            opacity: 0;
-            transform: translateY(30px); /* Start slightly lower */
-        }
-        .repo-card-visible {
-            opacity: 1;
-            transform: translateY(0); /* End at original position */
-        }
+    .repo-card-hidden {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    .repo-card-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-
-        /* Message styling for loading/error */
-        .message-feedback {
-            text-align: center;
-            padding: 1rem;
-            margin-top: 1rem;
-            border-radius: 8px;
-            font-weight: 500;
-        }
-        .message-loading {
-            background-color: #e0e7ff; /* Indigo-100 */
-            color: #3730a3; /* Indigo-700 */
-        }
-        .message-error {
-            background-color: #fee2e2; /* Red-100 */
-            color: #b91c1c; /* Red-700 */
-        }
-        .message-info {
-            background-color: #dbeafe; /* Blue-100 */
-            color: #1e40af; /* Blue-700 */
-        }
-
-    </style>
+    .message-feedback {
+      text-align: center;
+      padding: 1rem;
+      margin-top: 1rem;
+      border-radius: 8px;
+      font-weight: 500;
+    }
+    .message-loading {
+      background-color: #45475a;
+      color: #89b4fa;
+    }
+    .message-error {
+      background-color: #f38ba8;
+      color: #1e1e2e;
+    }
+    .message-info {
+      background-color: #313244;
+      color: #cdd6f4;
+    }
+  </style>
 </head>
 <body class="antialiased">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl pb-12">
-        <header class="resume-header">
-            <h1>Karim Smires</h1>
-            <h2>Rutgers New Brunswick, School of Engineering New Grad</h2>
-        </header>
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl pb-12">
+    <header class="resume-header">
+      <h1>Karim Smires</h1>
+      <h2>Rutgers New Brunswick, School of Engineering New Grad</h2>
+    </header>
 
-        <section id="contact-info" class="mb-8">
-            <h2 class="section-title mb-4">Contact Information</h2>
-            <ul class="space-y-2 text-gray-700">
-                <li>
-                    <span class="font-semibold">Email:</span>
-                    <a href="mailto:k.smires1686@gmail.com" class="custom-link">k.smires1686@gmail.com</a>
-                </li>
-                <li>
-                    <span class="font-semibold">LinkedIn:</span>
-                    <a href="https://www.linkedin.com/in/karim-smires/" target="_blank" rel="noopener noreferrer" class="custom-link">linkedin.com/in/karim-smires</a>
-                </li>
-                <li>
-                    <span class="font-semibold">GitHub:</span>
-                    <a href="https://github.com/ks1686" target="_blank" rel="noopener noreferrer" class="custom-link">github.com/ks1686</a>
-                </li>
-            </ul>
-        </section>
+    <section id="contact-info" class="mb-8">
+      <h2 class="section-title mb-4">Contact Information</h2>
+      <ul class="space-y-2 text-cdd6f4">
+        <li><span class="font-semibold">Email:</span> <a href="mailto:k.smires1686@gmail.com" class="custom-link">k.smires1686@gmail.com</a></li>
+        <li><span class="font-semibold">LinkedIn:</span> <a href="https://www.linkedin.com/in/karim-smires/" target="_blank" rel="noopener noreferrer" class="custom-link">linkedin.com/in/karim-smires</a></li>
+        <li><span class="font-semibold">GitHub:</span> <a href="https://github.com/ks1686" target="_blank" rel="noopener noreferrer" class="custom-link">github.com/ks1686</a></li>
+      </ul>
+    </section>
 
-        <section id="summary" class="mb-8">
-            <h2 class="section-title mb-4">Summary</h2>
-            <p class="text-gray-700 leading-relaxed">
-                Highly motivated and results-oriented New Graduate from Rutgers University - New Brunswick, School of Engineering, with a strong foundation in software development and electrical engineering. Eager to apply acquired knowledge and problem-solving skills to contribute to innovative projects and grow within a dynamic engineering environment. Possesses a passion for learning new technologies and a proven ability to collaborate effectively in team settings, as demonstrated through various academic and personal projects.
-            </p>
-        </section>
+    <section id="summary" class="mb-8">
+      <h2 class="section-title mb-4">Summary</h2>
+      <p class="leading-relaxed text-a6adc8">
+        Highly motivated and results-oriented New Graduate from Rutgers University - New Brunswick, School of Engineering, with a strong foundation in software development and electrical engineering. Eager to apply acquired knowledge and problem-solving skills to contribute to innovative projects and grow within a dynamic engineering environment. Passionate about learning new technologies and experienced in collaborative, team-driven project environments.
+      </p>
+    </section>
 
-        <section id="github-repositories">
-            <h2 class="section-title mb-6">GitHub Repositories</h2>
-            <div id="repos-container" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <p id="repos-loading-message" class="message-feedback message-loading col-span-full">Loading repositories...</p>
-            </div>
-        </section>
-    </div>
+    <section id="github-repositories">
+      <h2 class="section-title mb-6">GitHub Repositories</h2>
+      <div id="repos-container" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <p id="repos-loading-message" class="message-feedback message-loading col-span-full">Loading repositories...</p>
+      </div>
+    </section>
+  </div>
 
-    <script>
-        const githubUsername = "ks1686"; // Your GitHub username
-        const reposToExclude = ["ks1686.github.io", "ks1686"]; // Add repository names to exclude here
+  <script>
+    const githubUsername = "ks1686";
 
-        // Intersection Observer for scroll animations
-        const observerOptions = {
-            root: null, // Use the viewport as the root
-            rootMargin: '0px',
-            threshold: 0.1 // Trigger when 10% of the item is visible
-        };
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.1
+    };
 
-        const observerCallback = (entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.remove('repo-card-hidden');
-                    entry.target.classList.add('repo-card-visible');
-                    observer.unobserve(entry.target); // Stop observing once visible
-                }
-            });
-        };
+    const observerCallback = (entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.remove('repo-card-hidden');
+          entry.target.classList.add('repo-card-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    };
 
-        const repoObserver = new IntersectionObserver(observerCallback, observerOptions);
+    const repoObserver = new IntersectionObserver(observerCallback, observerOptions);
 
-        async function fetchGitHubRepos(username) {
-            const reposContainer = document.getElementById('repos-container');
-            const loadingMessage = document.getElementById('repos-loading-message');
-            const apiUrl = `https://api.github.com/users/${username}/repos?sort=updated&direction=desc&per_page=100`;
+    async function fetchGitHubRepos(username) {
+      const reposContainer = document.getElementById('repos-container');
+      const loadingMessage = document.getElementById('repos-loading-message');
+      const apiUrl = `https://api.github.com/users/${username}/repos?sort=updated&direction=desc&per_page=100`;
 
-            try {
-                const response = await fetch(apiUrl);
-                if (!response.ok) {
-                    throw new Error(`GitHub API error: ${response.status} ${response.statusText}`);
-                }
-                let repos = await response.json();
+      try {
+        const response = await fetch(apiUrl);
+        if (!response.ok) throw new Error(`GitHub API error: ${response.status} ${response.statusText}`);
+        const repos = await response.json();
 
-                // Filter out specified repositories
-                repos = repos.filter(repo => !reposToExclude.includes(repo.name));
+        if (loadingMessage) loadingMessage.remove();
+        reposContainer.innerHTML = '';
 
-                if (loadingMessage) {
-                    loadingMessage.remove();
-                }
-                reposContainer.innerHTML = '';
-
-                if (repos.length === 0) {
-                    reposContainer.innerHTML = '<p class="message-feedback message-info col-span-full">No public repositories found for this user (after filtering).</p>';
-                    return;
-                }
-
-                repos.forEach(repo => {
-                    const repoDiv = document.createElement('div');
-                    // Add base class and initial hidden state for animation
-                    repoDiv.className = 'repo-card repo-card-hidden flex flex-col justify-between';
-
-                    const repoNameLink = document.createElement('a');
-                    repoNameLink.href = repo.html_url;
-                    repoNameLink.target = '_blank';
-                    repoNameLink.rel = 'noopener noreferrer';
-                    repoNameLink.textContent = repo.name;
-
-                    const repoNameHeader = document.createElement('h3');
-                    repoNameHeader.className = 'text-lg font-semibold mb-2';
-                    repoNameHeader.appendChild(repoNameLink);
-
-                    const repoDescription = document.createElement('p');
-                    repoDescription.className = 'text-sm mb-3 flex-grow';
-                    repoDescription.textContent = repo.description || 'No description provided.';
-
-                    const repoLanguage = document.createElement('p');
-                    repoLanguage.className = 'repo-language';
-                    repoLanguage.innerHTML = `<strong>Language:</strong> ${repo.language || 'N/A'}`;
-                    
-                    const repoStars = document.createElement('p');
-                    repoStars.className = 'text-xs text-gray-500 mt-1';
-                    repoStars.innerHTML = `⭐ Stars: ${repo.stargazers_count} | 🍴 Forks: ${repo.forks_count}`;
-
-                    repoDiv.appendChild(repoNameHeader);
-                    repoDiv.appendChild(repoDescription);
-                    
-                    const footerDiv = document.createElement('div');
-                    footerDiv.appendChild(repoLanguage);
-                    footerDiv.appendChild(repoStars);
-                    repoDiv.appendChild(footerDiv);
-
-                    reposContainer.appendChild(repoDiv);
-                    repoObserver.observe(repoDiv); // Start observing the new card
-                });
-
-            } catch (error) {
-                console.error('Error fetching GitHub repositories:', error);
-                if (loadingMessage) loadingMessage.remove();
-                reposContainer.innerHTML = `<p class="message-feedback message-error col-span-full">Error loading repositories: ${error.message}. Please check the username and your internet connection.</p>`;
-            }
+        if (repos.length === 0) {
+          reposContainer.innerHTML = '<p class="message-feedback message-info col-span-full">No public repositories found for this user.</p>';
+          return;
         }
 
-        window.onload = () => {
-            const reposContainer = document.getElementById('repos-container');
-            const loadingMessage = document.getElementById('repos-loading-message');
+        repos.forEach(repo => {
+          const repoDiv = document.createElement('div');
+          repoDiv.className = 'repo-card repo-card-hidden flex flex-col justify-between';
 
-            if (githubUsername === "YOUR_GITHUB_USERNAME_HERE" || githubUsername === "") {
-                 if (loadingMessage) loadingMessage.remove();
-                reposContainer.innerHTML = '<p class="message-feedback message-info col-span-full">Please update the <code>githubUsername</code> variable in the script with your GitHub username to see your repositories.</p>';
-            } else {
-                fetchGitHubRepos(githubUsername);
-            }
-        };
-    </script>
+          const repoNameLink = document.createElement('a');
+          repoNameLink.href = repo.html_url;
+          repoNameLink.target = '_blank';
+          repoNameLink.rel = 'noopener noreferrer';
+          repoNameLink.textContent = repo.name;
+
+          const repoNameHeader = document.createElement('h3');
+          repoNameHeader.className = 'text-lg font-semibold mb-2';
+          repoNameHeader.appendChild(repoNameLink);
+
+          const repoDescription = document.createElement('p');
+          repoDescription.className = 'text-sm mb-3 flex-grow';
+          repoDescription.textContent = repo.description || 'No description provided.';
+
+          const repoLanguage = document.createElement('p');
+          repoLanguage.className = 'repo-language';
+          repoLanguage.innerHTML = `<strong>Language:</strong> ${repo.language || 'N/A'}`;
+
+          const repoStars = document.createElement('p');
+          repoStars.className = 'text-xs text-gray-400 mt-1';
+          repoStars.innerHTML = `⭐ Stars: ${repo.stargazers_count} | 🍴 Forks: ${repo.forks_count}`;
+
+          repoDiv.appendChild(repoNameHeader);
+          repoDiv.appendChild(repoDescription);
+          const footerDiv = document.createElement('div');
+          footerDiv.appendChild(repoLanguage);
+          footerDiv.appendChild(repoStars);
+          repoDiv.appendChild(footerDiv);
+
+          reposContainer.appendChild(repoDiv);
+          repoObserver.observe(repoDiv);
+        });
+
+      } catch (error) {
+        console.error('Error fetching GitHub repositories:', error);
+        if (loadingMessage) loadingMessage.remove();
+        reposContainer.innerHTML = `<p class="message-feedback message-error col-span-full">Error loading repositories: ${error.message}. Please check the username and your internet connection.</p>`;
+      }
+    }
+
+    window.onload = () => {
+      const reposContainer = document.getElementById('repos-container');
+      const loadingMessage = document.getElementById('repos-loading-message');
+      if (!githubUsername || githubUsername === "YOUR_GITHUB_USERNAME_HERE") {
+        if (loadingMessage) loadingMessage.remove();
+        reposContainer.innerHTML = '<p class="message-feedback message-info col-span-full">Please update the <code>githubUsername</code> variable in the script with your GitHub username to see your repositories.</p>';
+      } else {
+        fetchGitHubRepos(githubUsername);
+      }
+    };
+  </script>
 </body>
 </html>
