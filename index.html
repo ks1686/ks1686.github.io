@@ -281,8 +281,31 @@
         </section>
     </div>
 
-    <footer class="text-center py-8">
-        <p class="text-gray-500 text-sm">Made with love from NixOS</p>
+    <footer class="border-t border-gray-200 bg-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
+                <!-- Left side: Copyright & NixOS mention -->
+                <div class="text-sm text-gray-500 flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-4">
+                    <p>&copy; <span id="copyright-year">2024</span> Karim Smires. All Rights Reserved.</p>
+                    <div class="flex items-center space-x-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-blue-500" viewBox="0 0 256 256" fill="currentColor"><path d="M128.00003,3.1367188 L30.439484,56.027344 L30.439484,161.81055 C30.439484,161.81055 71.882843,190.28125 103.04105,206.5625 L103.04105,116.40625 L47.169952,85.695312 L47.169952,72.716797 L114.34964,111.45898 L114.34964,213.90625 C114.34964,213.90625 122.10745,217.84375 128.00003,221.13281 C133.89261,217.84375 141.65042,213.90625 141.65042,213.90625 L141.65042,111.45898 L208.83011,72.716797 L208.83011,85.695312 L152.959,116.40625 L152.959,206.5625 C184.11722,190.28125 225.56058,161.81055 225.56058,161.81055 L225.56058,56.027344 L128.00003,3.1367188 z M 141.65042,99.167969 L141.65042,39.607422 L198.92777,70.835938 L141.65042,99.167969 z"/></svg>
+                        <span>Crafted on NixOS</span>
+                    </div>
+                </div>
+
+                <!-- Right side: Social links -->
+                <div class="flex items-center space-x-4">
+                    <a href="https://github.com/ks1686" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-gray-600 transition-colors">
+                        <span class="sr-only">GitHub</span>
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.168 6.839 9.492.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.378.203 2.398.1 2.651.64.7 1.03 1.595 1.03 2.688 0 3.848-2.338 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12c0-5.523-4.477-10-10-10z" clip-rule="evenodd" /></svg>
+                    </a>
+                    <a href="https://www.linkedin.com/in/karim-smires/" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-gray-600 transition-colors">
+                        <span class="sr-only">LinkedIn</span>
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
     </footer>
 
     <!-- Floating AI Button -->
@@ -313,16 +336,18 @@
         const githubUsername = "ks1686";
         let repoObserver;
 
-        // Handles card fade-in/out animation
+        // Handles card fade-in animation
         const observerCallback = (entries, observer) => {
             entries.forEach(entry => {
+                // When an element comes into view...
                 if (entry.isIntersecting) {
+                    // Make it visible.
                     entry.target.classList.add('repo-card-visible');
                     entry.target.classList.remove('repo-card-hidden');
-                } else {
-                    entry.target.classList.add('repo-card-hidden');
-                    entry.target.classList.remove('repo-card-visible');
+                    // And then stop observing it so the animation doesn't re-trigger.
+                    observer.unobserve(entry.target);
                 }
+                // We no longer need the 'else' block that hides the element.
             });
         };
 
@@ -503,6 +528,8 @@
         window.onload = () => {
             initializeObserver();
             fetchGitHubRepos(githubUsername);
+            // Set the copyright year dynamically
+            document.getElementById('copyright-year').textContent = new Date().getFullYear();
         };
         window.onresize = initializeObserver;
     </script>
