@@ -117,6 +117,100 @@
         .message-loading { background-color: #e0e7ff; color: #3730a3; }
         .message-error { background-color: #fee2e2; color: #b91c1c; }
         .message-info { background-color: #dbeafe; color: #1e40af; }
+        
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+        .modal-overlay.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            transform: scale(0.95);
+            transition: transform 0.3s;
+        }
+        .modal-overlay.visible .modal-content {
+            transform: scale(1);
+        }
+        .chat-box {
+            flex-grow: 1;
+            overflow-y: auto;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background-color: #f9fafb;
+            border-radius: 8px;
+        }
+        .chat-message {
+            padding: 0.75rem;
+            border-radius: 8px;
+            margin-bottom: 0.75rem;
+            max-width: 85%;
+            word-wrap: break-word;
+        }
+        .chat-message.user {
+            background-color: #e0e7ff;
+            color: #3730a3;
+            margin-left: auto;
+        }
+        .chat-message.ai {
+            background-color: #f3f4f6;
+            color: #1f2937;
+            margin-right: auto;
+        }
+        .chat-message.loading {
+            background-color: #f3f4f6;
+            color: #6b7280;
+            text-align: center;
+        }
+
+        #floating-ai-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            background-color: #4f46e5;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+            border: none;
+            cursor: pointer;
+            z-index: 999;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s;
+            animation: pulse 2s infinite;
+        }
+        #floating-ai-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+            animation: none;
+        }
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(79, 70, 229, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(79, 70, 229, 0); }
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -191,6 +285,30 @@
         <p class="text-gray-500 text-sm">Made with love from NixOS</p>
     </footer>
 
+    <!-- Floating AI Button -->
+    <button id="floating-ai-btn" title="Ask AI About My Resume">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2.75L13.25 8L18 9.25L13.25 10.5L12 15.25L10.75 10.5L6 9.25L10.75 8L12 2.75Z" stroke="white" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M4 17L5 14L8 13L5 12L4 9L3 12L0 13L3 14L4 17Z" stroke="white" stroke-width="2" stroke-linejoin="round"/>
+        </svg>
+    </button>
+
+    <!-- AI Chat Modal -->
+    <div id="ai-chat-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-4">
+                <h3 id="modal-title" class="text-xl font-semibold">Ask about Karim's Resume</h3>
+                <button id="modal-close-btn" class="text-2xl font-bold text-gray-500 hover:text-gray-800">&times;</button>
+            </div>
+            <div id="modal-chat-box" class="chat-box"></div>
+            <div id="modal-input-container" class="flex items-center space-x-2">
+                <input type="text" id="modal-chat-input" placeholder="Ask about skills, experience, etc..." class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                <button id="modal-send-btn" class="bg-indigo-600 text-white px-5 py-2 rounded-lg font-semibold hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50">Send</button>
+            </div>
+        </div>
+    </div>
+
+
     <script>
         const githubUsername = "ks1686";
         let repoObserver;
@@ -219,6 +337,103 @@
                 skillsContainer.appendChild(skillTag);
             });
         }
+
+        const modal = document.getElementById('ai-chat-modal');
+        const modalChatBox = document.getElementById('modal-chat-box');
+        const modalTitle = document.getElementById('modal-title');
+        const modalInput = document.getElementById('modal-chat-input');
+        const modalSendBtn = document.getElementById('modal-send-btn');
+
+        // Functions to control the chat modal
+        function openModal() {
+            modalTitle.textContent = "Ask AI About My Resume";
+            modalChatBox.innerHTML = `<div class="chat-message ai">Hi! I'm an AI assistant trained on Karim's resume. Ask me anything about his skills, experience, or projects.</div>`;
+            modal.classList.add('visible');
+        }
+
+        function closeModal() {
+            modal.classList.remove('visible');
+        }
+        
+        function appendMessage(text, type) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `chat-message ${type}`;
+            messageDiv.textContent = text;
+            modalChatBox.appendChild(messageDiv);
+            modalChatBox.scrollTop = modalChatBox.scrollHeight;
+        }
+        
+        // Handles sending a message to the Gemini API
+        async function handleSendMessage() {
+            const userQuestion = modalInput.value.trim();
+            if (!userQuestion) return;
+
+            appendMessage(userQuestion, 'user');
+            modalInput.value = '';
+            modalSendBtn.disabled = true;
+            appendMessage("Thinking...", 'ai loading');
+            
+            try {
+                const prompt = `You are Karim Smires, a recent Electrical and Computer Engineering graduate from Rutgers. A recruiter is viewing your portfolio and has a question. Based on your full resume context below, answer their question in a professional, concise, and enthusiastic way. Speak in the first person, as if you are Karim.
+
+                **Your Full Resume:**
+                - **Contact:** k.smires1686@gmail.com, 732-790-6420
+                - **Education:** Bachelor of Science in Electrical and Computer Engineering from Rutgers, with a minor in Computer Science (GPA: 3.663, Summa Cum Laude).
+                - **Experience:** - **Intern at Charge Anywhere:** Used JavaScript for UIs, integrated AI/LLMs/blockchain, and built backend services with C#.
+                    - **Tutor at Rutgers:** Tutored over 100 students in computer engineering and STEM, focusing on OOP, circuit design, and algorithms.
+                - **Projects:** The user can see the list of projects on the page. You can refer to them generally if asked.
+                - **Key Skills:** Java, Python, C/C++, C#, Go, JavaScript, TypeScript, MATLAB, Verilog, VHDL, Assembly, HTML/CSS, Rust, Swift, Visual Studio, Android Studio, Xcode, Postman, MySQL, MongoDB, Git, Blockchain, Embedded Systems.
+
+                **Recruiter's Question:** "${userQuestion}"
+
+                **Your Answer (as Karim):**`;
+                
+                let chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
+                const payload = { contents: chatHistory };
+                
+                // --- API Key is placed here as requested ---
+                const apiKey = "AIzaSyBYEdn-YWyBlcO0tscZjRxyUL5XUIh7pJA";
+                
+                // Using the corrected model name for the API endpoint
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`;
+
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                
+                if (!response.ok) throw new Error(`API request failed: ${response.statusText}`);
+                const result = await response.json();
+                
+                document.querySelector('.chat-message.loading').remove();
+
+                if (result.candidates && result.candidates[0].content.parts[0].text) {
+                    appendMessage(result.candidates[0].content.parts[0].text, 'ai');
+                } else {
+                    const finishReason = result.candidates?.[0]?.finishReason || 'Unknown';
+                    if (finishReason === 'SAFETY') {
+                        throw new Error("The response was blocked due to safety settings.");
+                    } else {
+                        throw new Error("No valid response from AI. Finish Reason: " + finishReason);
+                    }
+                }
+
+            } catch (error) {
+                console.error("Gemini API Error:", error);
+                document.querySelector('.chat-message.loading').remove();
+                appendMessage(`Sorry, I encountered an error. Please try again. (${error.message})`, 'ai');
+            } finally {
+                modalSendBtn.disabled = false;
+            }
+        }
+        
+        // Event listeners for chat modal
+        document.getElementById('floating-ai-btn').addEventListener('click', openModal);
+        document.getElementById('modal-close-btn').addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+        modalSendBtn.addEventListener('click', handleSendMessage);
+        modalInput.addEventListener('keyup', (e) => { if(e.key === 'Enter') handleSendMessage(); });
 
         // Fetches and displays GitHub repositories
         async function fetchGitHubRepos(username) {
