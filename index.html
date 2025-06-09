@@ -7,82 +7,76 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Custom base styles */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f3f4f6; /* Light gray background (Tailwind gray-100) */
-            color: #1f2937; /* Dark gray text (Tailwind gray-800) */
+            background-color: #f3f4f6;
+            color: #1f2937;
         }
 
-        /* Custom styles for links to make them more prominent */
         .custom-link {
-            color: #4f46e5; /* Indigo-600 for primary actions/links */
+            color: #4f46e5;
             font-weight: 500;
         }
         .custom-link:hover {
-            color: #3730a3; /* Indigo-700 for hover */
+            color: #3730a3;
             text-decoration: underline;
         }
 
-        /* Style for section titles */
         .section-title {
-            color: #111827; /* Tailwind gray-900 */
-            border-bottom: 2px solid #6366f1; /* Indigo-500 */
-            padding-bottom: 8px; /* Corresponds to pb-2 in Tailwind */
-            margin-top: 32px; /* Corresponds to mt-8 in Tailwind */
-            font-size: 1.5em; /* Corresponds to text-2xl */
-            font-weight: 600; /* Corresponds to font-semibold */
+            color: #111827;
+            border-bottom: 2px solid #6366f1;
+            padding-bottom: 8px;
+            margin-top: 32px;
+            font-size: 1.5em;
+            font-weight: 600;
         }
 
-        /* Styling for the header */
         .resume-header {
-            background-color: #312e81; /* Deep Indigo (Tailwind indigo-800) */
-            color: #e0e7ff; /* Light Indigo text (Tailwind indigo-100) */
-            padding-top: 2rem; /* py-8 */
-            padding-bottom: 2rem; /* py-8 */
+            background-color: #312e81;
+            color: #e0e7ff;
+            padding-top: 2rem;
+            padding-bottom: 2rem;
             text-align: center;
-            margin-bottom: 2rem; /* mb-8 */
-            border-radius: 0 0 12px 12px; /* Rounded bottom corners */
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Subtle shadow */
+            margin-bottom: 2rem;
+            border-radius: 0 0 12px 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         }
         .resume-header h1 {
-            font-size: 2.25rem; /* text-4xl */
-            font-weight: 700; /* font-bold */
-            color: #ffffff; /* White */
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: #ffffff;
         }
         .resume-header h2 {
-            font-size: 1.25rem; /* text-xl */
-            font-weight: 400; /* font-normal */
-            color: #c7d2fe; /* Lighter Indigo text (Tailwind indigo-200) */
+            font-size: 1.25rem;
+            font-weight: 400;
+            color: #c7d2fe;
         }
         
-        /* Styling for skills badges */
         .skill-badge {
-            background-color: #e0e7ff; /* Indigo-100 */
-            color: #3730a3; /* Indigo-700 */
-            font-size: 0.875rem; /* text-sm */
-            font-weight: 500; /* font-medium */
-            margin-right: 0.5rem; /* mr-2 */
-            margin-bottom: 0.5rem; /* mb-2 */
-            padding: 0.25rem 0.75rem; /* px-3 py-1 */
-            border-radius: 9999px; /* rounded-full */
+            background-color: #e0e7ff;
+            color: #3730a3;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
             display: inline-block;
         }
 
-        /* Styling for repository cards */
         .repo-card {
-            background-color: #ffffff; /* White background */
-            border: 1px solid #e5e7eb; /* Tailwind gray-200 */
-            border-radius: 8px; /* Tailwind rounded-lg */
-            padding: 1.5rem; /* Tailwind p-6 */
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.07); /* Tailwind shadow-md */
-            transition: box-shadow 0.3s ease-in-out, opacity 0.5s ease-out, transform 0.5s ease-out; /* Added opacity and transform transitions */
+            background-color: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.07);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
         }
         .repo-card:hover {
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1); /* Tailwind shadow-xl */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
         }
         .repo-card h3 a {
-            color: #3730a3; /* Indigo-700 */
+            color: #3730a3;
             font-weight: 600;
         }
         .repo-card h3 a:hover {
@@ -90,26 +84,29 @@
         }
         .repo-card p {
             font-size: 0.9em;
-            color: #4b5563; /* Tailwind gray-600 */
+            color: #4b5563;
         }
         .repo-card .repo-language {
             font-size: 0.8em;
-            color: #6b7280; /* Tailwind gray-500 */
-            margin-top: 0.5rem; /* mt-2 */
+            color: #6b7280;
+            margin-top: 0.5rem;
         }
 
-        /* Animation states for repo cards */
         .repo-card-hidden {
             opacity: 0;
-            transform: translateY(30px); /* Start slightly lower */
+            transform: translateY(20px);
         }
         .repo-card-visible {
             opacity: 1;
-            transform: translateY(0); /* End at original position */
+            transform: translateY(0);
         }
 
+        /* Repo scrollbar styles */
+        #repos-scroll-area::-webkit-scrollbar { width: 8px; }
+        #repos-scroll-area::-webkit-scrollbar-track { background: transparent; }
+        #repos-scroll-area::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 8px; }
+        #repos-scroll-area::-webkit-scrollbar-thumb:hover { background: #9ca3af; }
 
-        /* Message styling for loading/error */
         .message-feedback {
             text-align: center;
             padding: 1rem;
@@ -117,19 +114,103 @@
             border-radius: 8px;
             font-weight: 500;
         }
-        .message-loading {
-            background-color: #e0e7ff; /* Indigo-100 */
-            color: #3730a3; /* Indigo-700 */
+        .message-loading { background-color: #e0e7ff; color: #3730a3; }
+        .message-error { background-color: #fee2e2; color: #b91c1c; }
+        .message-info { background-color: #dbeafe; color: #1e40af; }
+        
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
         }
-        .message-error {
-            background-color: #fee2e2; /* Red-100 */
-            color: #b91c1c; /* Red-700 */
+        .modal-overlay.visible {
+            opacity: 1;
+            visibility: visible;
         }
-        .message-info {
-            background-color: #dbeafe; /* Blue-100 */
-            color: #1e40af; /* Blue-700 */
+        .modal-content {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            transform: scale(0.95);
+            transition: transform 0.3s;
+        }
+        .modal-overlay.visible .modal-content {
+            transform: scale(1);
+        }
+        .chat-box {
+            flex-grow: 1;
+            overflow-y: auto;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background-color: #f9fafb;
+            border-radius: 8px;
+        }
+        .chat-message {
+            padding: 0.75rem;
+            border-radius: 8px;
+            margin-bottom: 0.75rem;
+            max-width: 85%;
+            word-wrap: break-word;
+        }
+        .chat-message.user {
+            background-color: #e0e7ff;
+            color: #3730a3;
+            margin-left: auto;
+        }
+        .chat-message.ai {
+            background-color: #f3f4f6;
+            color: #1f2937;
+            margin-right: auto;
+        }
+        .chat-message.loading {
+            background-color: #f3f4f6;
+            color: #6b7280;
+            text-align: center;
         }
 
+        #floating-ai-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            background-color: #4f46e5;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+            border: none;
+            cursor: pointer;
+            z-index: 999;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s;
+            animation: pulse 2s infinite;
+        }
+        #floating-ai-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+            animation: none;
+        }
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(79, 70, 229, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(79, 70, 229, 0); }
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -142,68 +223,113 @@
         <section id="contact-info" class="mb-8">
             <h2 class="section-title mb-4">Contact Information</h2>
             <ul class="space-y-2 text-gray-700">
-                <li>
-                    <span class="font-semibold">Email:</span>
-                    <a href="mailto:k.smires1686@gmail.com" class="custom-link">k.smires1686@gmail.com</a>
-                </li>
-                <li>
-                    <span class="font-semibold">LinkedIn:</span>
-                    <a href="https://www.linkedin.com/in/karim-smires/" target="_blank" rel="noopener noreferrer" class="custom-link">linkedin.com/in/karim-smires</a>
-                </li>
-                <li>
-                    <span class="font-semibold">GitHub:</span>
-                    <a href="https://github.com/ks1686" target="_blank" rel="noopener noreferrer" class="custom-link">github.com/ks1686</a>
-                </li>
+                <li><span class="font-semibold">Email:</span> <a href="mailto:k.smires1686@gmail.com" class="custom-link">k.smires1686@gmail.com</a></li>
+                <li><span class="font-semibold">Phone:</span> <a href="tel:732-790-6420" class="custom-link">732-790-6420</a></li>
+                <li><span class="font-semibold">LinkedIn:</span> <a href="https://www.linkedin.com/in/karim-smires/" target="_blank" rel="noopener noreferrer" class="custom-link">linkedin.com/in/karim-smires</a></li>
+                <li><span class="font-semibold">GitHub:</span> <a href="https://github.com/ks1686" target="_blank" rel="noopener noreferrer" class="custom-link">github.com/ks1686</a></li>
             </ul>
         </section>
 
         <section id="summary" class="mb-8">
-            <h2 class="section-title mb-4">Summary</h2>
-            <p class="text-gray-700 leading-relaxed">
-                Highly motivated and results-oriented New Graduate from Rutgers University - New Brunswick, School of Engineering, with a strong foundation in software development and electrical engineering. Eager to apply acquired knowledge and problem-solving skills to contribute to innovative projects and grow within a dynamic engineering environment. Possesses a passion for learning new technologies and a proven ability to collaborate effectively in team settings, as demonstrated through various academic and personal projects.
-            </p>
+            <h2 class="section-title mb-4">Education</h2>
+            <div class="text-gray-700">
+                <p class="font-bold text-lg">Rutgers University: School of Engineering</p>
+                <p>Bachelor of Science, Electrical and Computer Engineering</p>
+                <p>Minor: Computer Science</p>
+                <p>GPA: 3.663</p>
+                <p class="mt-2 text-sm text-indigo-700 font-medium">Dean's List (Multiple Semesters), Summa Cum Laude</p>
+            </div>
+        </section>
+
+        <section id="experience" class="mb-8">
+            <h2 class="section-title mb-4">Professional Experience</h2>
+            <div class="space-y-6">
+                <div>
+                    <h3 class="font-bold text-lg">Charge Anywhere | Intern</h3>
+                    <p class="text-sm text-gray-600 mb-2">June 2024 - August 2024</p>
+                    <ul class="list-disc list-inside space-y-1 text-gray-700">
+                        <li>Utilized JavaScript to create and maintain responsive user interfaces, optimizing user experience and integrating advanced technologies such as AI, LLMs, and blockchain infrastructure for scalable solutions.</li>
+                        <li>Built and supported backend services using C#, including developing APIs and managing database interactions to ensure seamless system performance.</li>
+                        <li>Collaborated with cross-functional teams to define, design, and deliver new features, resulting in increased customer engagement and satisfaction.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg">Rutgers University | Tutor/Student Worker</h3>
+                    <p class="text-sm text-gray-600 mb-2">October 2023 - May 2025</p>
+                    <ul class="list-disc list-inside space-y-1 text-gray-700">
+                        <li>Provided tutoring to over 100 underclassmen and peers in introductory computer engineering and STEM courses.</li>
+                        <li>Fostered a collaborative learning environment, improving understanding of concepts like object-oriented programming and circuit design.</li>
+                        <li>Assisted students in exam preparation and mastering various concepts to enhance problem-solving skills.</li>
+                    </ul>
+                </div>
+            </div>
         </section>
         
         <section id="skills" class="mb-8">
             <h2 class="section-title mb-4">Key Skills</h2>
             <div id="skills-container" class="flex flex-wrap">
-                <!-- Skills will be dynamically inserted here -->
             </div>
         </section>
 
         <section id="github-repositories">
-            <h2 class="section-title mb-6">GitHub Repositories</h2>
-            <div id="repos-container" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <p id="repos-loading-message" class="message-feedback message-loading col-span-full">Loading repositories...</p>
+            <h2 class="section-title mb-6">GitHub Repositories / Special Projects</h2>
+            <div id="repos-scroll-area" class="md:max-h-[70vh] md:overflow-y-auto p-1 md:p-4 md:bg-gray-50 md:border md:border-gray-200 rounded-lg">
+                <div id="repos-container" class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <p id="repos-loading-message" class="message-feedback message-loading col-span-full">Loading repositories...</p>
+                </div>
             </div>
         </section>
     </div>
 
+    <footer class="text-center py-8">
+        <p class="text-gray-500 text-sm">Made with love from NixOS</p>
+    </footer>
+
+    <!-- Floating AI Button -->
+    <button id="floating-ai-btn" title="Ask AI About My Resume">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2.75L13.25 8L18 9.25L13.25 10.5L12 15.25L10.75 10.5L6 9.25L10.75 8L12 2.75Z" stroke="white" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M4 17L5 14L8 13L5 12L4 9L3 12L0 13L3 14L4 17Z" stroke="white" stroke-width="2" stroke-linejoin="round"/>
+        </svg>
+    </button>
+
+    <!-- AI Chat Modal -->
+    <div id="ai-chat-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-4">
+                <h3 id="modal-title" class="text-xl font-semibold">Ask about Karim's Resume</h3>
+                <button id="modal-close-btn" class="text-2xl font-bold text-gray-500 hover:text-gray-800">&times;</button>
+            </div>
+            <div id="modal-chat-box" class="chat-box"></div>
+            <div id="modal-input-container" class="flex items-center space-x-2">
+                <input type="text" id="modal-chat-input" placeholder="Ask about skills, experience, etc..." class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                <button id="modal-send-btn" class="bg-indigo-600 text-white px-5 py-2 rounded-lg font-semibold hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50">Send</button>
+            </div>
+        </div>
+    </div>
+
+
     <script>
-        const githubUsername = "ks1686"; // Your GitHub username
+        const githubUsername = "ks1686";
+        let repoObserver;
 
-        // Intersection Observer for scroll animations
-        const observerOptions = {
-            root: null, // Use the viewport as the root
-            rootMargin: '0px',
-            threshold: 0.1 // Trigger when 10% of the item is visible
-        };
-
+        // Handles card fade-in/out animation
         const observerCallback = (entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.remove('repo-card-hidden');
                     entry.target.classList.add('repo-card-visible');
-                    observer.unobserve(entry.target); // Stop observing once visible
+                    entry.target.classList.remove('repo-card-hidden');
+                } else {
+                    entry.target.classList.add('repo-card-hidden');
+                    entry.target.classList.remove('repo-card-visible');
                 }
             });
         };
 
-        const repoObserver = new IntersectionObserver(observerCallback, observerOptions);
-        
+        // Populates the skills section
         function renderSkills(skills) {
             const skillsContainer = document.getElementById('skills-container');
-            skillsContainer.innerHTML = ''; // Clear previous skills
+            skillsContainer.innerHTML = '';
             skills.forEach(skill => {
                 const skillTag = document.createElement('span');
                 skillTag.className = 'skill-badge';
@@ -212,115 +338,164 @@
             });
         }
 
+        const modal = document.getElementById('ai-chat-modal');
+        const modalChatBox = document.getElementById('modal-chat-box');
+        const modalTitle = document.getElementById('modal-title');
+        const modalInput = document.getElementById('modal-chat-input');
+        const modalSendBtn = document.getElementById('modal-send-btn');
 
+        // Functions to control the chat modal
+        function openModal() {
+            modalTitle.textContent = "Ask AI About My Resume";
+            modalChatBox.innerHTML = `<div class="chat-message ai">Hi! I'm an AI assistant trained on Karim's resume. Ask me anything about his skills, experience, or projects.</div>`;
+            modal.classList.add('visible');
+        }
+
+        function closeModal() {
+            modal.classList.remove('visible');
+        }
+        
+        function appendMessage(text, type) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `chat-message ${type}`;
+            messageDiv.textContent = text;
+            modalChatBox.appendChild(messageDiv);
+            modalChatBox.scrollTop = modalChatBox.scrollHeight;
+        }
+        
+        // Handles sending a message to the Gemini API
+        async function handleSendMessage() {
+            const userQuestion = modalInput.value.trim();
+            if (!userQuestion) return;
+
+            appendMessage(userQuestion, 'user');
+            modalInput.value = '';
+            modalSendBtn.disabled = true;
+            appendMessage("Thinking...", 'ai loading');
+            
+            try {
+                const prompt = `You are Karim Smires, a recent Electrical and Computer Engineering graduate from Rutgers. A recruiter is viewing your portfolio and has a question. Based on your full resume context below, answer their question in a professional, concise, and enthusiastic way. Speak in the first person, as if you are Karim.
+
+                **Your Full Resume:**
+                - **Contact:** k.smires1686@gmail.com, 732-790-6420
+                - **Education:** Bachelor of Science in Electrical and Computer Engineering from Rutgers, with a minor in Computer Science (GPA: 3.663, Summa Cum Laude).
+                - **Experience:** - **Intern at Charge Anywhere:** Used JavaScript for UIs, integrated AI/LLMs/blockchain, and built backend services with C#.
+                    - **Tutor at Rutgers:** Tutored over 100 students in computer engineering and STEM, focusing on OOP, circuit design, and algorithms.
+                - **Projects:** The user can see the list of projects on the page. You can refer to them generally if asked.
+                - **Key Skills:** Java, Python, C/C++, C#, Go, JavaScript, TypeScript, MATLAB, Verilog, VHDL, Assembly, HTML/CSS, Rust, Swift, Visual Studio, Android Studio, Xcode, Postman, MySQL, MongoDB, Git, Blockchain, Embedded Systems.
+
+                **Recruiter's Question:** "${userQuestion}"
+
+                **Your Answer (as Karim):**`;
+                
+                let chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
+                const payload = { contents: chatHistory };
+                const apiKey = ""
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                
+                if (!response.ok) throw new Error(`API request failed: ${response.statusText}`);
+                const result = await response.json();
+                
+                document.querySelector('.chat-message.loading').remove();
+
+                if (result.candidates && result.candidates[0].content.parts[0].text) {
+                    appendMessage(result.candidates[0].content.parts[0].text, 'ai');
+                } else {
+                    throw new Error("No valid response from AI.");
+                }
+
+            } catch (error) {
+                console.error("Gemini API Error:", error);
+                document.querySelector('.chat-message.loading').remove();
+                appendMessage(`Sorry, I encountered an error. Please try again. (${error.message})`, 'ai');
+            } finally {
+                modalSendBtn.disabled = false;
+            }
+        }
+        
+        // Event listeners for chat modal
+        document.getElementById('floating-ai-btn').addEventListener('click', openModal);
+        document.getElementById('modal-close-btn').addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+        modalSendBtn.addEventListener('click', handleSendMessage);
+        modalInput.addEventListener('keyup', (e) => { if(e.key === 'Enter') handleSendMessage(); });
+
+        // Fetches and displays GitHub repositories
         async function fetchGitHubRepos(username) {
             const reposContainer = document.getElementById('repos-container');
             const loadingMessage = document.getElementById('repos-loading-message');
             const apiUrl = `https://api.github.com/users/${username}/repos?sort=updated&direction=desc&per_page=100`; 
 
-            // Base skills for an ECE graduate
-            const baseSkills = [
-                'Python', 'Java', 'C/C++', 'JavaScript', 'HTML/CSS', 'SQL', 
-                'MATLAB', 'Verilog', 'Git', 'Data Structures', 'Algorithms', 
-                'Object-Oriented Programming'
+            const resumeSkills = [
+                'Java', 'Kotlin', 'C/C++', 'C#', 'Go', 'JavaScript', 'Typescript', 'Python', 'MATLAB', 'Verilog', 
+                'VHDL', 'Assembly Language', 'HTML/CSS', 'Rust', 'Swift', 'Visual Studio', 'Android Studio', 
+                'Xcode', 'Postman', 'MySQL', 'MongoDB', 'Git/GitHub', 'Xilinx Vivado', 'Quartus', 'ASP', 
+                'OOP', 'Embedded Systems', 'Blockchain'
             ];
-            
-            // Render base skills immediately
-            renderSkills(new Set(baseSkills));
+            renderSkills(new Set(resumeSkills));
 
             try {
                 const response = await fetch(apiUrl);
-                if (!response.ok) {
-                    throw new Error(`GitHub API error: ${response.status} ${response.statusText}`);
-                }
+                if (!response.ok) throw new Error(`GitHub API error: ${response.status} ${response.statusText}`);
                 const repos = await response.json();
+                const filteredRepos = repos.filter(repo => repo.name !== 'ks1686.github.io' && repo.name !== 'ks1686');
 
-                // Filter out the specified repositories
-                const filteredRepos = repos.filter(repo => {
-                    return repo.name !== 'ks1686.github.io' && repo.name !== 'ks1686';
-                });
-
-                // Extract languages from repos
-                const repoLanguages = new Set();
-                filteredRepos.forEach(repo => {
-                    if(repo.language) {
-                        repoLanguages.add(repo.language);
-                    }
-                });
-                
-                // Combine base skills with repo languages for a comprehensive list
-                const allSkills = new Set([...baseSkills, ...repoLanguages]);
-                renderSkills(allSkills);
-
-
-                if (loadingMessage) {
-                    loadingMessage.remove(); 
-                }
+                if (loadingMessage) loadingMessage.remove();
                 reposContainer.innerHTML = ''; 
 
                 if (filteredRepos.length === 0) {
-                    reposContainer.innerHTML = '<p class="message-feedback message-info col-span-full">No public project repositories found for this user.</p>';
+                    reposContainer.innerHTML = '<p class="message-feedback message-info col-span-full">No public project repositories found.</p>';
                     return;
                 }
-
+                
                 filteredRepos.forEach(repo => {
                     const repoDiv = document.createElement('div');
-                    // Add base class and initial hidden state for animation
-                    repoDiv.className = 'repo-card repo-card-hidden flex flex-col justify-between'; 
-
-                    const repoNameLink = document.createElement('a');
-                    repoNameLink.href = repo.html_url;
-                    repoNameLink.target = '_blank';
-                    repoNameLink.rel = 'noopener noreferrer';
-                    repoNameLink.textContent = repo.name;
-
-                    const repoNameHeader = document.createElement('h3');
-                    repoNameHeader.className = 'text-lg font-semibold mb-2'; 
-                    repoNameHeader.appendChild(repoNameLink);
-
-                    const repoDescription = document.createElement('p');
-                    repoDescription.className = 'text-sm mb-3 flex-grow'; 
-                    repoDescription.textContent = repo.description || 'No description provided.';
-
-                    const repoLanguage = document.createElement('p');
-                    repoLanguage.className = 'repo-language'; 
-                    repoLanguage.innerHTML = `<strong>Language:</strong> ${repo.language || 'N/A'}`;
+                    repoDiv.className = 'repo-card repo-card-hidden'; 
+                    repoDiv.innerHTML = `
+                        <div class="flex flex-col h-full">
+                            <div>
+                                <h3 class="text-lg font-semibold mb-2"><a href="${repo.html_url}" target="_blank" rel="noopener noreferrer">${repo.name}</a></h3>
+                                <p class="text-sm mb-3 flex-grow">${repo.description || 'No description provided.'}</p>
+                            </div>
+                            <div class="mt-auto pt-4">
+                               <p class="repo-language"><strong>Language:</strong> ${repo.language || 'N/A'}</p>
+                               <p class="text-xs text-gray-500 mt-1">⭐ Stars: ${repo.stargazers_count} | 🍴 Forks: ${repo.forks_count}</p>
+                            </div>
+                        </div>`;
                     
-                    const repoStars = document.createElement('p');
-                    repoStars.className = 'text-xs text-gray-500 mt-1';
-                    repoStars.innerHTML = `⭐ Stars: ${repo.stargazers_count} | 🍴 Forks: ${repo.forks_count}`;
-
-                    repoDiv.appendChild(repoNameHeader);
-                    repoDiv.appendChild(repoDescription);
-                    
-                    const footerDiv = document.createElement('div');
-                    footerDiv.appendChild(repoLanguage);
-                    footerDiv.appendChild(repoStars);
-                    repoDiv.appendChild(footerDiv);
-
                     reposContainer.appendChild(repoDiv);
-                    repoObserver.observe(repoDiv); // Start observing the new card
+                    repoObserver.observe(repoDiv);
                 });
 
             } catch (error) {
                 console.error('Error fetching GitHub repositories:', error);
-                // If API fails, the base skills are already rendered. We just update the repo section.
                 if (loadingMessage) loadingMessage.remove();
                 reposContainer.innerHTML = `<p class="message-feedback message-error col-span-full">Error loading repositories: ${error.message}.</p>`;
             }
         }
 
-        window.onload = () => {
-            const reposContainer = document.getElementById('repos-container');
-            const loadingMessage = document.getElementById('repos-loading-message');
+        // Sets up the intersection observer based on screen size
+        function initializeObserver() {
+            const scrollContainer = document.getElementById('repos-scroll-area');
+            const isDesktopView = getComputedStyle(scrollContainer).overflowY === 'auto';
+            if (repoObserver) repoObserver.disconnect();
+            repoObserver = new IntersectionObserver(observerCallback, {
+                root: isDesktopView ? scrollContainer : null,
+                threshold: 0.1
+            });
+        }
 
-            if (githubUsername === "YOUR_GITHUB_USERNAME_HERE" || githubUsername === "") {
-                 if (loadingMessage) loadingMessage.remove();
-                reposContainer.innerHTML = '<p class="message-feedback message-info col-span-full">Please update the <code>githubUsername</code> variable in the script with your GitHub username to see your repositories.</p>';
-            } else {
-                fetchGitHubRepos(githubUsername);
-            }
+        window.onload = () => {
+            initializeObserver();
+            fetchGitHubRepos(githubUsername);
         };
+        window.onresize = initializeObserver;
     </script>
 </body>
 </html>
