@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Resume - Material Design</title>
+    <title>My Resume - Karim Smires</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -54,6 +54,19 @@
             font-size: 1.25rem; /* text-xl */
             font-weight: 400; /* font-normal */
             color: #c7d2fe; /* Lighter Indigo text (Tailwind indigo-200) */
+        }
+        
+        /* Styling for skills badges */
+        .skill-badge {
+            background-color: #e0e7ff; /* Indigo-100 */
+            color: #3730a3; /* Indigo-700 */
+            font-size: 0.875rem; /* text-sm */
+            font-weight: 500; /* font-medium */
+            margin-right: 0.5rem; /* mr-2 */
+            margin-bottom: 0.5rem; /* mb-2 */
+            padding: 0.25rem 0.75rem; /* px-3 py-1 */
+            border-radius: 9999px; /* rounded-full */
+            display: inline-block;
         }
 
         /* Styling for repository cards */
@@ -150,6 +163,13 @@
                 Highly motivated and results-oriented New Graduate from Rutgers University - New Brunswick, School of Engineering, with a strong foundation in software development and electrical engineering. Eager to apply acquired knowledge and problem-solving skills to contribute to innovative projects and grow within a dynamic engineering environment. Possesses a passion for learning new technologies and a proven ability to collaborate effectively in team settings, as demonstrated through various academic and personal projects.
             </p>
         </section>
+        
+        <section id="skills" class="mb-8">
+            <h2 class="section-title mb-4">Key Skills</h2>
+            <div id="skills-container" class="flex flex-wrap">
+                <!-- Skills will be dynamically inserted here -->
+            </div>
+        </section>
 
         <section id="github-repositories">
             <h2 class="section-title mb-6">GitHub Repositories</h2>
@@ -180,11 +200,33 @@
         };
 
         const repoObserver = new IntersectionObserver(observerCallback, observerOptions);
+        
+        function renderSkills(skills) {
+            const skillsContainer = document.getElementById('skills-container');
+            skillsContainer.innerHTML = ''; // Clear previous skills
+            skills.forEach(skill => {
+                const skillTag = document.createElement('span');
+                skillTag.className = 'skill-badge';
+                skillTag.textContent = skill;
+                skillsContainer.appendChild(skillTag);
+            });
+        }
+
 
         async function fetchGitHubRepos(username) {
             const reposContainer = document.getElementById('repos-container');
             const loadingMessage = document.getElementById('repos-loading-message');
             const apiUrl = `https://api.github.com/users/${username}/repos?sort=updated&direction=desc&per_page=100`; 
+
+            // Base skills for an ECE graduate
+            const baseSkills = [
+                'Python', 'Java', 'C/C++', 'JavaScript', 'HTML/CSS', 'SQL', 
+                'MATLAB', 'Verilog', 'Git', 'Data Structures', 'Algorithms', 
+                'Object-Oriented Programming'
+            ];
+            
+            // Render base skills immediately
+            renderSkills(new Set(baseSkills));
 
             try {
                 const response = await fetch(apiUrl);
@@ -193,17 +235,35 @@
                 }
                 const repos = await response.json();
 
+                // Filter out the specified repositories
+                const filteredRepos = repos.filter(repo => {
+                    return repo.name !== 'ks1686.github.io' && repo.name !== 'ks1686';
+                });
+
+                // Extract languages from repos
+                const repoLanguages = new Set();
+                filteredRepos.forEach(repo => {
+                    if(repo.language) {
+                        repoLanguages.add(repo.language);
+                    }
+                });
+                
+                // Combine base skills with repo languages for a comprehensive list
+                const allSkills = new Set([...baseSkills, ...repoLanguages]);
+                renderSkills(allSkills);
+
+
                 if (loadingMessage) {
                     loadingMessage.remove(); 
                 }
                 reposContainer.innerHTML = ''; 
 
-                if (repos.length === 0) {
-                    reposContainer.innerHTML = '<p class="message-feedback message-info col-span-full">No public repositories found for this user.</p>';
+                if (filteredRepos.length === 0) {
+                    reposContainer.innerHTML = '<p class="message-feedback message-info col-span-full">No public project repositories found for this user.</p>';
                     return;
                 }
 
-                repos.forEach(repo => {
+                filteredRepos.forEach(repo => {
                     const repoDiv = document.createElement('div');
                     // Add base class and initial hidden state for animation
                     repoDiv.className = 'repo-card repo-card-hidden flex flex-col justify-between'; 
@@ -244,8 +304,9 @@
 
             } catch (error) {
                 console.error('Error fetching GitHub repositories:', error);
+                // If API fails, the base skills are already rendered. We just update the repo section.
                 if (loadingMessage) loadingMessage.remove();
-                reposContainer.innerHTML = `<p class="message-feedback message-error col-span-full">Error loading repositories: ${error.message}. Please check the username and your internet connection.</p>`;
+                reposContainer.innerHTML = `<p class="message-feedback message-error col-span-full">Error loading repositories: ${error.message}.</p>`;
             }
         }
 
