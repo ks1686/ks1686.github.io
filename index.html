@@ -386,67 +386,69 @@
         
         // Handles sending a message to the Gemini API
         async function handleSendMessage() {
-            const userQuestion = modalInput.value.trim();
-            if (!userQuestion) return;
-
-            appendMessage(userQuestion, 'user');
-            modalInput.value = '';
-            modalSendBtn.disabled = true;
-            appendMessage("Thinking...", 'ai loading');
-            
-            try {
-                const prompt = `You are Karim Smires, a recent Electrical and Computer Engineering graduate from Rutgers. A recruiter is viewing your portfolio and has a question. Based on your full resume context below, answer their question in a professional, concise, and enthusiastic way. Speak in the first person, as if you are Karim.
-
-                **Your Full Resume:**
-                - **Contact:** k.smires1686@gmail.com, 732-790-6420
-                - **Education:** Bachelor of Science in Electrical and Computer Engineering from Rutgers, with a minor in Computer Science (GPA: 3.663, Summa Cum Laude).
-                - **Experience:** - **Intern at Charge Anywhere:** Used JavaScript for UIs, integrated AI/LLMs/blockchain, and built backend services with C#.
-                    - **Tutor at Rutgers:** Tutored over 100 students in computer engineering and STEM, focusing on OOP, circuit design, and algorithms.
-                - **Projects:** The user can see the list of projects on the page. You can refer to them generally if asked.
-                - **Key Skills:** Java, Python, C/C++, C#, Go, JavaScript, TypeScript, MATLAB, Verilog, VHDL, Assembly, HTML/CSS, Rust, Swift, Visual Studio, Android Studio, Xcode, Postman, MySQL, MongoDB, Git, Blockchain, Embedded Systems.
-
-                **Recruiter's Question:** "${userQuestion}"
-
-                **Your Answer (as Karim):**`;
-                
-                let chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
-                const payload = { contents: chatHistory };
-                
-                // --- API Key is placed here as requested ---
-                const apiKey = "AIzaSyBYEdn-YWyBlcO0tscZjRxyUL5XUIh7pJA";
-                
-                // Using the corrected model name for the API endpoint
-                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`;
-
-                const response = await fetch(apiUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-                
-                if (!response.ok) throw new Error(`API request failed: ${response.statusText}`);
-                const result = await response.json();
-                
-                document.querySelector('.chat-message.loading').remove();
-
-                if (result.candidates && result.candidates[0].content.parts[0].text) {
-                    appendMessage(result.candidates[0].content.parts[0].text, 'ai');
-                } else {
-                    const finishReason = result.candidates?.[0]?.finishReason || 'Unknown';
-                    if (finishReason === 'SAFETY') {
-                        throw new Error("The response was blocked due to safety settings.");
-                    } else {
-                        throw new Error("No valid response from AI. Finish Reason: " + finishReason);
-                    }
+          const userQuestion = modalInput.value.trim();
+          if (!userQuestion) return;
+        
+          appendMessage(userQuestion, 'user');
+          modalInput.value = '';
+          modalSendBtn.disabled = true;
+          appendMessage("Thinking...", 'ai loading');
+        
+          try {
+            const prompt = `You are Karim Smires, a recent Electrical and Computer Engineering graduate from Rutgers. A recruiter is viewing your portfolio and has a question. Based on your full resume context below, answer their question in a professional, concise way. Speak in the first person, as if you are Karim.
+        
+        **Your Full Resume:**
+        - **Contact:** k.smires1686@gmail.com, 732-790-6420
+        - **Education:** B.S. Electrical and Computer Engineering, Minor in Computer Science (GPA: 3.663, Summa Cum Laude) — Rutgers.
+        - **Experience:** 
+          - **Charge Anywhere (Intern):** JavaScript UIs, AI/LLMs/blockchain integrations, backend APIs in C#.
+          - **Rutgers Tutor:** Tutored 100+ students in OOP, circuit design, algorithms.
+        - **Projects:** Visible on this page.
+        - **Key Skills:** Java, Python, C/C++, C#, Go, JavaScript, TypeScript, MATLAB, Verilog, VHDL, Assembly, HTML/CSS, Rust, Swift, Visual Studio, Android Studio, Xcode, Postman, MySQL, MongoDB, Git, Blockchain, Embedded Systems.
+        
+        **Recruiter's Question:** "${userQuestion}"
+        
+        **Your Answer (as Karim):**`;
+        
+            const apiKey = "AIzaSyC3BXyzXEhMcatb3w5uC-L1kI5enS81FY0";
+            const apiUrl = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
+        
+            const payload = {
+              contents: [
+                {
+                  parts: [{ text: prompt }]
                 }
-
-            } catch (error) {
-                console.error("Gemini API Error:", error);
-                document.querySelector('.chat-message.loading').remove();
-                appendMessage(`Sorry, I encountered an error. Please try again. (${error.message})`, 'ai');
-            } finally {
-                modalSendBtn.disabled = false;
+              ]
+            };
+        
+            const response = await fetch(apiUrl, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                "X-Goog-Api-Key": apiKey
+              },
+              body: JSON.stringify(payload)
+            });
+        
+            if (!response.ok) throw new Error(`API request failed: ${response.status} ${response.statusText}`);
+            const result = await response.json();
+        
+            document.querySelector('.chat-message.loading')?.remove();
+        
+            const text = result?.candidates?.[0]?.content?.parts?.[0]?.text;
+            if (text) {
+              appendMessage(text, 'ai');
+            } else {
+              const finishReason = result?.candidates?.[0]?.finishReason || 'Unknown';
+              throw new Error(`No valid response from AI. Finish Reason: ${finishReason}`);
             }
+          } catch (error) {
+            console.error("Gemini API Error:", error);
+            document.querySelector('.chat-message.loading')?.remove();
+            appendMessage(`Sorry, I encountered an error. Please try again. (${error.message})`, 'ai');
+          } finally {
+            modalSendBtn.disabled = false;
+          }
         }
         
         // Event listeners for chat modal
