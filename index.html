@@ -3,533 +3,495 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Resume - Karim Smires</title>
+    <title>Karim Smires | Resume</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f3f4f6;
-            color: #1f2937;
+        :root {
+            --bg: #f8fafc;
+            --surface: #ffffff;
+            --ink: #0f172a;
+            --muted: #475569;
+            --line: #e2e8f0;
+            --brand: #1e3a8a;
+            --brand-soft: #dbeafe;
         }
 
-        .custom-link {
-            color: #4f46e5;
-            font-weight: 500;
+        html {
+            scroll-behavior: smooth;
         }
-        .custom-link:hover {
-            color: #3730a3;
-            text-decoration: underline;
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background:
+                radial-gradient(circle at 10% 10%, rgba(30, 58, 138, 0.05), transparent 35%),
+                radial-gradient(circle at 90% 20%, rgba(15, 23, 42, 0.05), transparent 30%),
+                var(--bg);
+            color: var(--ink);
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.88);
+            border: 1px solid rgba(226, 232, 240, 0.9);
+            backdrop-filter: blur(8px);
         }
 
         .section-title {
-            color: #111827;
-            border-bottom: 2px solid #6366f1;
-            padding-bottom: 8px;
-            margin-top: 32px;
-            font-size: 1.5em;
-            font-weight: 600;
+            font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+            color: #0b1b44;
         }
 
-        .resume-header {
-            background-color: #312e81;
-            color: #e0e7ff;
-            padding-top: 2rem;
-            padding-bottom: 2rem;
-            text-align: center;
-            margin-bottom: 2rem;
-            border-radius: 0 0 12px 12px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        .section-title::after {
+            content: '';
+            display: block;
+            margin-top: 0.55rem;
+            width: 4rem;
+            height: 3px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, #1e3a8a, #3b82f6);
         }
-        .resume-header h1 {
-            font-size: 2.25rem;
-            font-weight: 700;
-            color: #ffffff;
-        }
-        .resume-header h2 {
-            font-size: 1.25rem;
-            font-weight: 400;
-            color: #c7d2fe;
-        }
-        
-        .skill-badge {
-            background-color: #e0e7ff;
-            color: #3730a3;
-            font-size: 0.875rem;
+
+        .contact-link {
+            color: #1e3a8a;
             font-weight: 500;
-            margin-right: 0.5rem;
-            margin-bottom: 0.5rem;
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        .contact-link:hover {
+            color: #1d4ed8;
+        }
+
+        .surface-card {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .surface-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 16px 32px rgba(15, 23, 42, 0.1);
+        }
+
+        .timeline-item {
+            border-left: 2px solid #cbd5e1;
+            padding-left: 1rem;
+            position: relative;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -7px;
+            top: 0.35rem;
+            width: 12px;
+            height: 12px;
+            border-radius: 999px;
+            background: #1e3a8a;
+            box-shadow: 0 0 0 3px #dbeafe;
+        }
+
+        .detail-chip {
             display: inline-block;
+            border: 1px solid #dbeafe;
+            background: #eff6ff;
+            color: #1e3a8a;
+            border-radius: 999px;
+            padding: 0.2rem 0.6rem;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+        }
+
+        .skill-group + .skill-group {
+            margin-top: 1rem;
+        }
+
+        .skill-label {
+            font-size: 0.84rem;
+            font-weight: 700;
+            color: #1e3a8a;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            margin-bottom: 0.35rem;
+        }
+
+        .skill-badge {
+            display: inline-block;
+            padding: 0.42rem 0.8rem;
+            margin: 0 0.45rem 0.45rem 0;
+            background: #eef2ff;
+            color: #312e81;
+            border: 1px solid #c7d2fe;
+            border-radius: 999px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            letter-spacing: 0.01em;
+            transition: all 0.2s ease;
+        }
+        .skill-badge:hover {
+            transform: translateY(-1px);
+            background: #e0e7ff;
         }
 
         .repo-card {
-            background-color: #ffffff;
-            border: 1px solid #e5e7eb;
-            border-radius: 8px;
-            padding: 1.5rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.07);
-            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 1.2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.25s ease;
         }
         .repo-card:hover {
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+            transform: translateY(-4px);
+            border-color: #bfdbfe;
+            box-shadow: 0 14px 28px rgba(15, 23, 42, 0.08);
         }
-        .repo-card h3 a {
-            color: #3730a3;
-            font-weight: 600;
+        .repo-name {
+            color: #1e3a8a;
+            font-weight: 700;
+            text-decoration: none;
         }
-        .repo-card h3 a:hover {
+        .repo-name:hover {
             text-decoration: underline;
         }
-        .repo-card p {
-            font-size: 0.9em;
-            color: #4b5563;
-        }
-        .repo-card .repo-language {
-            font-size: 0.8em;
-            color: #6b7280;
-            margin-top: 0.5rem;
-        }
-
-        .repo-card-hidden {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        .repo-card-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Repo scrollbar styles */
-        #repos-scroll-area::-webkit-scrollbar { width: 8px; }
-        #repos-scroll-area::-webkit-scrollbar-track { background: transparent; }
-        #repos-scroll-area::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 8px; }
-        #repos-scroll-area::-webkit-scrollbar-thumb:hover { background: #9ca3af; }
 
         .message-feedback {
             text-align: center;
             padding: 1rem;
-            margin-top: 1rem;
-            border-radius: 8px;
+            margin-top: 0.5rem;
+            border-radius: 12px;
             font-weight: 500;
         }
-        .message-loading { background-color: #e0e7ff; color: #3730a3; }
+        .message-loading { background-color: #dbeafe; color: #1e40af; }
         .message-error { background-color: #fee2e2; color: #b91c1c; }
-        .message-info { background-color: #dbeafe; color: #1e40af; }
-        
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
+        .message-info { background-color: #ecfeff; color: #155e75; }
+
+        .reveal {
             opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s, visibility 0.3s;
+            transform: translateY(18px);
+            transition: opacity 0.65s ease, transform 0.65s ease;
         }
-        .modal-overlay.visible {
+        .reveal.is-visible {
             opacity: 1;
-            visibility: visible;
-        }
-        .modal-content {
-            background: #fff;
-            padding: 2rem;
-            border-radius: 8px;
-            width: 90%;
-            max-width: 600px;
-            max-height: 80vh;
-            display: flex;
-            flex-direction: column;
-            transform: scale(0.95);
-            transition: transform 0.3s;
-        }
-        .modal-overlay.visible .modal-content {
-            transform: scale(1);
-        }
-        .chat-box {
-            flex-grow: 1;
-            overflow-y: auto;
-            margin-bottom: 1rem;
-            padding: 1rem;
-            background-color: #f9fafb;
-            border-radius: 8px;
-        }
-        .chat-message {
-            padding: 0.75rem;
-            border-radius: 8px;
-            margin-bottom: 0.75rem;
-            max-width: 85%;
-            word-wrap: break-word;
-        }
-        .chat-message.user {
-            background-color: #e0e7ff;
-            color: #3730a3;
-            margin-left: auto;
-        }
-        .chat-message.ai {
-            background-color: #f3f4f6;
-            color: #1f2937;
-            margin-right: auto;
-        }
-        .chat-message.loading {
-            background-color: #f3f4f6;
-            color: #6b7280;
-            text-align: center;
+            transform: translateY(0);
         }
 
-        #floating-ai-btn {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            width: 60px;
-            height: 60px;
-            background-color: #4f46e5;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-            border: none;
-            cursor: pointer;
-            z-index: 999;
-            transition: transform 0.2s ease-in-out, box-shadow 0.2s;
-            animation: pulse 2s infinite;
-        }
-        #floating-ai-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-            animation: none;
-        }
-        @keyframes pulse {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(79, 70, 229, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(79, 70, 229, 0); }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            .surface-card,
+            .repo-card,
+            .skill-badge,
+            .reveal {
+                transition: none;
+                transform: none;
+            }
+            .reveal { opacity: 1; }
         }
     </style>
 </head>
 <body class="antialiased">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl pb-12">
-        <header class="resume-header">
-            <h1>Karim Smires</h1>
-            <h2>Rutgers New Brunswick, School of Engineering New Grad</h2>
-        </header>
+    <header class="sticky top-0 z-40 border-b border-slate-200/80 bg-white/85 backdrop-blur-sm">
+        <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+            <p class="text-sm sm:text-base font-semibold tracking-tight text-slate-900">Karim Smires</p>
+            <nav class="hidden sm:flex items-center gap-5 text-sm text-slate-600">
+                <a href="#highlights" class="hover:text-slate-900 transition-colors">Highlights</a>
+                <a href="#education" class="hover:text-slate-900 transition-colors">Education</a>
+                <a href="#experience" class="hover:text-slate-900 transition-colors">Experience</a>
+                <a href="#special-projects" class="hover:text-slate-900 transition-colors">Projects</a>
+                <a href="#skills" class="hover:text-slate-900 transition-colors">Skills</a>
+                <a href="#github-projects" class="hover:text-slate-900 transition-colors">GitHub</a>
+            </nav>
+        </div>
+    </header>
 
-        <section id="contact-info" class="mb-8">
-            <h2 class="section-title mb-4">Contact Information</h2>
-            <ul class="space-y-2 text-gray-700">
-                <li><span class="font-semibold">Email:</span> <a href="mailto:k.smires1686@gmail.com" class="custom-link">k.smires1686@gmail.com</a></li>
-                <li><span class="font-semibold">Phone:</span> <a href="tel:732-790-6420" class="custom-link">732-790-6420</a></li>
-                <li><span class="font-semibold">LinkedIn:</span> <a href="https://www.linkedin.com/in/karim-smires/" target="_blank" rel="noopener noreferrer" class="custom-link">linkedin.com/in/karim-smires</a></li>
-                <li><span class="font-semibold">GitHub:</span> <a href="https://github.com/ks1686" target="_blank" rel="noopener noreferrer" class="custom-link">github.com/ks1686</a></li>
-            </ul>
-        </section>
-
-        <section id="summary" class="mb-8">
-            <h2 class="section-title mb-4">Education</h2>
-            <div class="text-gray-700">
-                <p class="font-bold text-lg">Rutgers University: School of Engineering</p>
-                <p>Bachelor of Science, Electrical and Computer Engineering</p>
-                <p>Minor: Computer Science</p>
-                <p>GPA: 3.663</p>
-                <p class="mt-2 text-sm text-indigo-700 font-medium">Dean's List (Multiple Semesters), Summa Cum Laude</p>
+    <main class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-8 sm:py-10 lg:py-14">
+        <section class="glass-panel surface-card p-6 sm:p-8 lg:p-10 reveal">
+            <div class="grid gap-8 lg:grid-cols-[1.2fr,0.8fr] lg:items-end">
+                <div>
+                    <p class="inline-flex items-center rounded-full bg-blue-50 text-blue-900 border border-blue-200 px-3 py-1 text-xs font-semibold uppercase tracking-wide mb-4">
+                        Master's Student • Machine Learning
+                    </p>
+                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-950">Karim Smires</h1>
+                    <p class="mt-3 text-base sm:text-lg text-slate-600 max-w-2xl">
+                        Master's student in Machine Learning at Rutgers with strong full-stack engineering experience, IEEE publication authorship, and hands-on work across AI-enabled applications, payment systems, and scalable platform development.
+                    </p>
+                </div>
+                <div class="rounded-2xl border border-slate-200 bg-white p-5 sm:p-6 shadow-sm">
+                    <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-500 mb-3">Contact</h2>
+                    <ul class="space-y-2 text-sm sm:text-base text-slate-700">
+                        <li><span class="font-semibold">Email:</span> <a href="mailto:k.smires101@icloud.com" class="contact-link">k.smires101@icloud.com</a></li>
+                        <li><span class="font-semibold">Phone:</span> <a href="tel:732-790-6420" class="contact-link">732-790-6420</a></li>
+                        <li><span class="font-semibold">LinkedIn:</span> <a href="https://www.linkedin.com/in/karim-smires/" target="_blank" rel="noopener noreferrer" class="contact-link">linkedin.com/in/karim-smires</a></li>
+                        <li><span class="font-semibold">GitHub:</span> <a href="https://github.com/ks1686" target="_blank" rel="noopener noreferrer" class="contact-link">github.com/ks1686</a></li>
+                        <li><span class="font-semibold">Website:</span> <a href="https://ks1686.github.io" target="_blank" rel="noopener noreferrer" class="contact-link">ks1686.github.io</a></li>
+                    </ul>
+                </div>
             </div>
         </section>
 
-        <section id="experience" class="mb-8">
-            <h2 class="section-title mb-4">Professional Experience</h2>
-            <div class="space-y-6">
-                <div>
-                    <h3 class="font-bold text-lg">Charge Anywhere | Intern</h3>
-                    <p class="text-sm text-gray-600 mb-2">June 2024 - August 2024</p>
-                    <ul class="list-disc list-inside space-y-1 text-gray-700">
-                        <li>Utilized JavaScript to create and maintain responsive user interfaces, optimizing user experience and integrating advanced technologies such as AI, LLMs, and blockchain infrastructure for scalable solutions.</li>
-                        <li>Built and supported backend services using C#, including developing APIs and managing database interactions to ensure seamless system performance.</li>
-                        <li>Collaborated with cross-functional teams to define, design, and deliver new features, resulting in increased customer engagement and satisfaction.</li>
-                    </ul>
+        <section id="highlights" class="grid gap-4 sm:gap-5 md:grid-cols-2 xl:grid-cols-4 mt-6 reveal">
+            <article class="surface-card p-5">
+                <p class="text-xs font-semibold uppercase tracking-wide text-blue-700">Academic Distinction</p>
+                <p class="mt-2 text-sm text-slate-700">Highest Honors (Summa Cum Laude), 3.663 undergraduate GPA, and multiple Dean's List semesters.</p>
+            </article>
+            <article class="surface-card p-5">
+                <p class="text-xs font-semibold uppercase tracking-wide text-blue-700">Teaching Impact</p>
+                <p class="mt-2 text-sm text-slate-700">Tutored 100+ students and served as a grader across multiple Rutgers engineering courses.</p>
+            </article>
+            <article class="surface-card p-5">
+                <p class="text-xs font-semibold uppercase tracking-wide text-blue-700">Engineering Delivery</p>
+                <p class="mt-2 text-sm text-slate-700">Delivered full-stack e-commerce systems with Node.js, Python, C#, AI assistant integration, and blockchain-enabled payments.</p>
+            </article>
+            <article class="surface-card p-5">
+                <p class="text-xs font-semibold uppercase tracking-wide text-blue-700">Current Focus</p>
+                <p class="mt-2 text-sm text-slate-700">Pursuing a Master's in Machine Learning (GPA: 3.500) with focus in applied AI and ML systems.</p>
+            </article>
+        </section>
+
+        <div class="grid gap-6 lg:grid-cols-2 mt-6">
+            <section id="education" class="surface-card p-6 sm:p-7 reveal">
+                <h2 class="section-title">Education</h2>
+                <div class="space-y-5 text-slate-700">
+                    <div>
+                        <div class="flex flex-wrap items-center gap-2 mb-1">
+                            <p class="text-lg font-bold text-slate-900">Rutgers University: School of Engineering</p>
+                            <span class="detail-chip">Piscataway, NJ</span>
+                        </div>
+                        <p>Master of Science, Machine Learning</p>
+                        <p class="text-sm text-slate-500">Sept 2025 — May 2027</p>
+                        <p>GPA: 3.500</p>
+                    </div>
+                    <div class="border-t border-slate-100 pt-4">
+                        <p class="font-semibold text-slate-900">Bachelor of Science, Electrical and Computer Engineering</p>
+                        <p>Minor: Computer Science</p>
+                        <p class="text-sm text-slate-500">Sept 2021 — May 2025</p>
+                        <p>GPA: 3.663</p>
+                        <p class="pt-1 text-sm font-semibold text-blue-900">Dean's List (Fall 21, Spring 22, Spring 23, Fall 23, Spring 25), Highest Honors (Summa Cum Laude)</p>
+                    </div>
                 </div>
-                <div>
-                    <h3 class="font-bold text-lg">Rutgers University | Tutor/Student Worker</h3>
-                    <p class="text-sm text-gray-600 mb-2">October 2023 - May 2025</p>
-                    <ul class="list-disc list-inside space-y-1 text-gray-700">
+            </section>
+
+            <section id="skills" class="surface-card p-6 sm:p-7 reveal">
+                <h2 class="section-title">Key Skills</h2>
+                <div id="skills-container" class="text-sm sm:text-base text-slate-700"></div>
+            </section>
+        </div>
+
+        <section id="experience" class="surface-card p-6 sm:p-7 mt-6 reveal">
+            <h2 class="section-title">Professional Experience</h2>
+            <div class="grid gap-6 sm:gap-7 lg:grid-cols-2">
+                <article class="timeline-item pb-1">
+                    <h3 class="text-lg font-bold text-slate-900">Rutgers University | Student Worker</h3>
+                    <p class="text-sm text-slate-500 mb-3">Piscataway, NJ • Oct 2023 — Current</p>
+                    <ul class="list-disc list-outside pl-5 space-y-2 text-slate-700 text-sm sm:text-base">
                         <li>Provided tutoring to over 100 underclassmen and peers in introductory computer engineering and STEM courses.</li>
-                        <li>Fostered a collaborative learning environment, improving understanding of concepts like object-oriented programming and circuit design.</li>
-                        <li>Assisted students in exam preparation and mastering various concepts to enhance problem-solving skills.</li>
+                        <li>Fostered a collaborative learning environment, improving understanding of object-oriented programming, circuit design, and algorithmic programming.</li>
+                        <li>Worked as a grader in multiple engineering courses in collaboration with professors, teaching assistants, and coworkers.</li>
                     </ul>
-                </div>
-            </div>
-        </section>
-        
-        <section id="skills" class="mb-8">
-            <h2 class="section-title mb-4">Key Skills</h2>
-            <div id="skills-container" class="flex flex-wrap">
+                </article>
+
+                <article class="timeline-item pb-1">
+                    <h3 class="text-lg font-bold text-slate-900">Charge Anywhere | Intern</h3>
+                    <p class="text-sm text-slate-500 mb-3">Piscataway, NJ • Jun 2024 — Aug 2024</p>
+                    <ul class="list-disc list-outside pl-5 space-y-2 text-slate-700 text-sm sm:text-base">
+                        <li>Developed a full-stack e-commerce platform using Node.js, Python, and C#, integrating dynamic JSON-based menu management and robust backend APIs.</li>
+                        <li>Engineered secure payment gateways supporting both credit card and cryptocurrency (XLM, ETH) transactions.</li>
+                        <li>Created responsive JavaScript user interfaces, integrating a customizable AI chatbot assistant and blockchain infrastructure to enhance customer engagement.</li>
+                    </ul>
+                </article>
             </div>
         </section>
 
-        <section id="github-repositories">
-            <h2 class="section-title mb-6">GitHub Repositories / Special Projects</h2>
-            <div id="repos-scroll-area" class="md:max-h-[70vh] md:overflow-y-auto p-1 md:p-4 md:bg-gray-50 md:border md:border-gray-200 rounded-lg">
-                <div id="repos-container" class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <p id="repos-loading-message" class="message-feedback message-loading col-span-full">Loading repositories...</p>
-                </div>
+        <section id="special-projects" class="surface-card p-6 sm:p-7 mt-6 reveal">
+            <h2 class="section-title">Special Projects</h2>
+            <div class="grid gap-6 sm:gap-7 lg:grid-cols-3">
+                <article class="timeline-item pb-1">
+                    <h3 class="text-base sm:text-lg font-bold text-slate-900">DrinkSync: A Sustainable Hydration Tracking System (IEEE Publication)</h3>
+                    <p class="text-sm text-slate-500 mb-3">Dubai, UAE • February 2026</p>
+                    <ul class="list-disc list-outside pl-5 space-y-2 text-slate-700 text-sm">
+                        <li>Co-authored and published an IEEE paper detailing a low-cost IoT smart coaster that transforms reusable bottles into smart devices.</li>
+                        <li>Engineered hardware integration using Arduino Nano, HX711 amplifier, load cells, and MPU6050 inertial sensor to track fluid consumption.</li>
+                        <li>Developed a Kotlin Android app with BLE, real-time visualization, Room database persistence, and gamified goal tracking.</li>
+                    </ul>
+                </article>
+
+                <article class="timeline-item pb-1">
+                    <h3 class="text-base sm:text-lg font-bold text-slate-900">Photo Gallery</h3>
+                    <p class="text-sm text-slate-500 mb-3">January 2024 — May 2024</p>
+                    <ul class="list-disc list-outside pl-5 space-y-2 text-slate-700 text-sm">
+                        <li>Created desktop and mobile Java applications for interactive photo management and customizable album organization.</li>
+                        <li>Implemented search capabilities to locate photos by geographic location and user-defined tags.</li>
+                    </ul>
+                </article>
+
+                <article class="timeline-item pb-1">
+                    <h3 class="text-base sm:text-lg font-bold text-slate-900">PartySafari</h3>
+                    <p class="text-sm text-slate-500 mb-3">September 2023 — December 2023</p>
+                    <ul class="list-disc list-outside pl-5 space-y-2 text-slate-700 text-sm">
+                        <li>Established a scalable Node.js server-side codebase for a marketplace platform and integrated multiple external modules.</li>
+                        <li>Engineered a MongoDB-backed notification system to create, manage, and deliver email notifications for better user engagement.</li>
+                    </ul>
+                </article>
             </div>
         </section>
-    </div>
 
-    <footer class="border-t border-gray-200 bg-white">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
-            <div class="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
-                <!-- Left side: Copyright & NixOS mention -->
-                <div class="text-sm text-gray-500 flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-4">
-                    <p>&copy; <span id="copyright-year">2024</span> Karim Smires. All Rights Reserved.</p>
-                </div>
+        <section id="github-projects" class="surface-card p-6 sm:p-7 mt-6 reveal">
+            <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 mb-5">
+                <h2 class="section-title mb-0">GitHub Repositories / Special Projects</h2>
+                <p class="text-sm text-slate-500">Live projects loaded directly from GitHub</p>
+            </div>
+            <div id="repos-container" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5">
+                <p id="repos-loading-message" class="message-feedback message-loading md:col-span-2 xl:col-span-3">Loading repositories...</p>
+            </div>
+        </section>
+    </main>
 
-                <!-- Right side: Social links -->
-                <div class="flex items-center space-x-4">
-                    <a href="https://github.com/ks1686" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-gray-600 transition-colors">
-                        <span class="sr-only">GitHub</span>
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.168 6.839 9.492.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.378.203 2.398.1 2.651.64.7 1.03 1.595 1.03 2.688 0 3.848-2.338 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12c0-5.523-4.477-10-10-10z" clip-rule="evenodd" /></svg>
-                    </a>
-                    <a href="https://www.linkedin.com/in/karim-smires/" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-gray-600 transition-colors">
-                        <span class="sr-only">LinkedIn</span>
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                    </a>
-                </div>
+    <footer class="border-t border-slate-200 bg-white/90 mt-8">
+        <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p class="text-sm text-slate-500">© <span id="copyright-year">2024</span> Karim Smires. All rights reserved.</p>
+            <div class="flex items-center gap-4">
+                <a href="https://github.com/ks1686" target="_blank" rel="noopener noreferrer" class="text-slate-500 hover:text-slate-700 transition-colors" aria-label="GitHub">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.168 6.839 9.492.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.378.203 2.398.1 2.651.64.7 1.03 1.595 1.03 2.688 0 3.848-2.338 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12c0-5.523-4.477-10-10-10z" clip-rule="evenodd" /></svg>
+                </a>
+                <a href="https://www.linkedin.com/in/karim-smires/" target="_blank" rel="noopener noreferrer" class="text-slate-500 hover:text-slate-700 transition-colors" aria-label="LinkedIn">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                </a>
             </div>
         </div>
     </footer>
 
-    <!-- Floating AI Button -->
-    <button id="floating-ai-btn" title="Ask AI About My Resume">
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2.75L13.25 8L18 9.25L13.25 10.5L12 15.25L10.75 10.5L6 9.25L10.75 8L12 2.75Z" stroke="white" stroke-width="2" stroke-linejoin="round"/>
-            <path d="M4 17L5 14L8 13L5 12L4 9L3 12L0 13L3 14L4 17Z" stroke="white" stroke-width="2" stroke-linejoin="round"/>
-        </svg>
-    </button>
-
-    <!-- AI Chat Modal -->
-    <div id="ai-chat-modal" class="modal-overlay">
-        <div class="modal-content">
-            <div class="flex justify-between items-center mb-4">
-                <h3 id="modal-title" class="text-xl font-semibold">Ask about Karim's Resume</h3>
-                <button id="modal-close-btn" class="text-2xl font-bold text-gray-500 hover:text-gray-800">&times;</button>
-            </div>
-            <div id="modal-chat-box" class="chat-box"></div>
-            <div id="modal-input-container" class="flex items-center space-x-2">
-                <input type="text" id="modal-chat-input" placeholder="Ask about skills, experience, etc..." class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                <button id="modal-send-btn" class="bg-indigo-600 text-white px-5 py-2 rounded-lg font-semibold hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50">Send</button>
-            </div>
-        </div>
-    </div>
-
-
     <script>
         const githubUsername = "ks1686";
-        let repoObserver;
 
-        // Handles card fade-in animation
-        const observerCallback = (entries, observer) => {
-            entries.forEach(entry => {
-                // When an element comes into view...
-                if (entry.isIntersecting) {
-                    // Make it visible.
-                    entry.target.classList.add('repo-card-visible');
-                    entry.target.classList.remove('repo-card-hidden');
-                    // And then stop observing it so the animation doesn't re-trigger.
-                    observer.unobserve(entry.target);
-                }
-                // We no longer need the 'else' block that hides the element.
-            });
-        };
-
-        // Populates the skills section
         function renderSkills(skills) {
             const skillsContainer = document.getElementById('skills-container');
             skillsContainer.innerHTML = '';
-            skills.forEach(skill => {
-                const skillTag = document.createElement('span');
-                skillTag.className = 'skill-badge';
-                skillTag.textContent = skill;
-                skillsContainer.appendChild(skillTag);
+
+            skills.forEach(group => {
+                const groupDiv = document.createElement('div');
+                groupDiv.className = 'skill-group';
+
+                const label = document.createElement('p');
+                label.className = 'skill-label';
+                label.textContent = group.label;
+
+                const values = document.createElement('p');
+                values.textContent = group.values;
+
+                groupDiv.appendChild(label);
+                groupDiv.appendChild(values);
+                skillsContainer.appendChild(groupDiv);
             });
         }
 
-        const modal = document.getElementById('ai-chat-modal');
-        const modalChatBox = document.getElementById('modal-chat-box');
-        const modalTitle = document.getElementById('modal-title');
-        const modalInput = document.getElementById('modal-chat-input');
-        const modalSendBtn = document.getElementById('modal-send-btn');
-
-        // Functions to control the chat modal
-        function openModal() {
-            modalTitle.textContent = "Ask AI About My Resume";
-            modalChatBox.innerHTML = `<div class="chat-message ai">Hi! I'm an AI assistant trained on Karim's resume. Ask me anything about his skills, experience, or projects.</div>`;
-            modal.classList.add('visible');
-        }
-
-        function closeModal() {
-            modal.classList.remove('visible');
-        }
-        
-        function appendMessage(text, type) {
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `chat-message ${type}`;
-            messageDiv.textContent = text;
-            modalChatBox.appendChild(messageDiv);
-            modalChatBox.scrollTop = modalChatBox.scrollHeight;
-        }
-        
-        // Handles sending a message to the Gemini API
-        async function handleSendMessage() {
-          const userQuestion = modalInput.value.trim();
-          if (!userQuestion) return;
-        
-          appendMessage(userQuestion, 'user');
-          modalInput.value = '';
-          modalSendBtn.disabled = true;
-          appendMessage("Thinking...", 'ai loading');
-        
-          try {
-            const prompt = `You are Karim Smires, a recent Electrical and Computer Engineering graduate from Rutgers. A recruiter is viewing your portfolio and has a question. Based on your full resume context below, answer their question in a professional, concise way. Speak in the first person, as if you are Karim.
-        
-        **Your Full Resume:**
-        - **Contact:** k.smires1686@gmail.com, 732-790-6420
-        - **Education:** B.S. Electrical and Computer Engineering, Minor in Computer Science (GPA: 3.663, Summa Cum Laude) — Rutgers.
-        - **Experience:** 
-          - **Charge Anywhere (Intern):** JavaScript UIs, AI/LLMs/blockchain integrations, backend APIs in C#.
-          - **Rutgers Tutor:** Tutored 100+ students in OOP, circuit design, algorithms.
-        - **Projects:** Visible on this page.
-        - **Key Skills:** Java, Python, C/C++, C#, Go, JavaScript, TypeScript, MATLAB, Verilog, VHDL, Assembly, HTML/CSS, Rust, Swift, Visual Studio, Android Studio, Xcode, Postman, MySQL, MongoDB, Git, Blockchain, Embedded Systems.
-        
-        **Recruiter's Question:** "${userQuestion}"
-        
-        **Your Answer (as Karim):**`;
-        
-            const apiKey = "AIzaSyC3BXyzXEhMcatb3w5uC-L1kI5enS81FY0";
-            const apiUrl = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
-        
-            const payload = {
-              contents: [
-                {
-                  parts: [{ text: prompt }]
-                }
-              ]
-            };
-        
-            const response = await fetch(apiUrl, {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-                "X-Goog-Api-Key": apiKey
-              },
-              body: JSON.stringify(payload)
-            });
-        
-            if (!response.ok) throw new Error(`API request failed: ${response.status} ${response.statusText}`);
-            const result = await response.json();
-        
-            document.querySelector('.chat-message.loading')?.remove();
-        
-            const text = result?.candidates?.[0]?.content?.parts?.[0]?.text;
-            if (text) {
-              appendMessage(text, 'ai');
-            } else {
-              const finishReason = result?.candidates?.[0]?.finishReason || 'Unknown';
-              throw new Error(`No valid response from AI. Finish Reason: ${finishReason}`);
+        function animateIn(element) {
+            if (!element.classList.contains('reveal')) {
+                element.classList.add('reveal');
             }
-          } catch (error) {
-            console.error("Gemini API Error:", error);
-            document.querySelector('.chat-message.loading')?.remove();
-            appendMessage(`Sorry, I encountered an error. Please try again. (${error.message})`, 'ai');
-          } finally {
-            modalSendBtn.disabled = false;
-          }
-        }
-        
-        // Event listeners for chat modal
-        document.getElementById('floating-ai-btn').addEventListener('click', openModal);
-        document.getElementById('modal-close-btn').addEventListener('click', closeModal);
-        modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
-        modalSendBtn.addEventListener('click', handleSendMessage);
-        modalInput.addEventListener('keyup', (e) => { if(e.key === 'Enter') handleSendMessage(); });
 
-        // Fetches and displays GitHub repositories
-        async function fetchGitHubRepos(username) {
+            requestAnimationFrame(() => {
+                element.classList.add('is-visible');
+            });
+        }
+
+        function initializeRevealAnimations() {
+            const revealTargets = document.querySelectorAll('.reveal');
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.12
+            });
+
+            revealTargets.forEach(target => observer.observe(target));
+            return observer;
+        }
+
+        async function fetchGitHubRepos(username, revealObserver) {
             const reposContainer = document.getElementById('repos-container');
             const loadingMessage = document.getElementById('repos-loading-message');
-            const apiUrl = `https://api.github.com/users/${username}/repos?sort=updated&direction=desc&per_page=100`; 
+            const apiUrl = `https://api.github.com/users/${username}/repos?sort=updated&direction=desc&per_page=100`;
 
             const resumeSkills = [
-                'Java', 'Kotlin', 'C/C++', 'C#', 'Go', 'JavaScript', 'Typescript', 'Python', 'MATLAB', 'Verilog', 
-                'VHDL', 'Assembly Language', 'HTML/CSS', 'Rust', 'Swift', 'Visual Studio', 'Android Studio', 
-                'Xcode', 'Postman', 'MySQL', 'MongoDB', 'Git/GitHub', 'Xilinx Vivado', 'Quartus', 'ASP', 
-                'OOP', 'Embedded Systems', 'Blockchain'
+                {
+                    label: 'Platforms',
+                    values: 'Windows, MacOS, Linux, iOS, Android'
+                },
+                {
+                    label: 'Software / Frameworks',
+                    values: 'Visual Studio, Android Studio, Xcode, Postman, MySQL, Git, Vivado, Quartus, ASP, OOP, Blockchain, PyTorch, TensorFlow, Hugging Face, OpenCV, Pandas, NumPy, CUDA'
+                },
+                {
+                    label: 'AI / ML Concepts',
+                    values: 'Large Language Models (LLMs), Deep Learning, Natural Language Processing (NLP), Computer Vision, Neural Networks, Reinforcement Learning, Generative AI, Predictive Modeling'
+                },
+                {
+                    label: 'Programming Languages',
+                    values: 'Java, Kotlin, C/C++, C#, Go, JavaScript, TypeScript, Python, MATLAB, Verilog, VHDL, Assembly Language, HTML/CSS, Rust, Swift'
+                }
             ];
-            renderSkills(new Set(resumeSkills));
+            renderSkills(resumeSkills);
 
             try {
                 const response = await fetch(apiUrl);
-                if (!response.ok) throw new Error(`GitHub API error: ${response.status} ${response.statusText}`);
+                if (!response.ok) {
+                    throw new Error(`GitHub API error: ${response.status} ${response.statusText}`);
+                }
+
                 const repos = await response.json();
                 const filteredRepos = repos.filter(repo => repo.name !== 'ks1686.github.io' && repo.name !== 'ks1686');
 
-                if (loadingMessage) loadingMessage.remove();
-                reposContainer.innerHTML = ''; 
+                if (loadingMessage) {
+                    loadingMessage.remove();
+                }
+                reposContainer.innerHTML = '';
 
                 if (filteredRepos.length === 0) {
-                    reposContainer.innerHTML = '<p class="message-feedback message-info col-span-full">No public project repositories found.</p>';
+                    reposContainer.innerHTML = '<p class="message-feedback message-info md:col-span-2 xl:col-span-3">No public project repositories found.</p>';
                     return;
                 }
-                
-                filteredRepos.forEach(repo => {
-                    const repoDiv = document.createElement('div');
-                    repoDiv.className = 'repo-card repo-card-hidden'; 
+
+                filteredRepos.forEach((repo, index) => {
+                    const repoDiv = document.createElement('article');
+                    repoDiv.className = 'repo-card reveal';
+                    repoDiv.style.transitionDelay = `${Math.min(index * 35, 280)}ms`;
                     repoDiv.innerHTML = `
                         <div class="flex flex-col h-full">
                             <div>
-                                <h3 class="text-lg font-semibold mb-2"><a href="${repo.html_url}" target="_blank" rel="noopener noreferrer">${repo.name}</a></h3>
-                                <p class="text-sm mb-3 flex-grow">${repo.description || 'No description provided.'}</p>
+                                <h3 class="text-base sm:text-lg mb-2"><a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="repo-name">${repo.name}</a></h3>
+                                <p class="text-sm text-slate-600 mb-4">${repo.description || 'No description provided.'}</p>
                             </div>
-                            <div class="mt-auto pt-4">
-                               <p class="repo-language"><strong>Language:</strong> ${repo.language || 'N/A'}</p>
-                               <p class="text-xs text-gray-500 mt-1">⭐ Stars: ${repo.stargazers_count} | 🍴 Forks: ${repo.forks_count}</p>
+                            <div class="mt-auto border-t border-slate-100 pt-3 text-xs sm:text-sm text-slate-500">
+                                <p><strong class="text-slate-700">Language:</strong> ${repo.language || 'N/A'}</p>
+                                <p class="mt-1">⭐ ${repo.stargazers_count} • 🍴 ${repo.forks_count}</p>
                             </div>
                         </div>`;
-                    
-                    reposContainer.appendChild(repoDiv);
-                    repoObserver.observe(repoDiv);
-                });
 
+                    reposContainer.appendChild(repoDiv);
+                    revealObserver.observe(repoDiv);
+                    animateIn(repoDiv);
+                });
             } catch (error) {
                 console.error('Error fetching GitHub repositories:', error);
-                if (loadingMessage) loadingMessage.remove();
-                reposContainer.innerHTML = `<p class="message-feedback message-error col-span-full">Error loading repositories: ${error.message}.</p>`;
+                if (loadingMessage) {
+                    loadingMessage.remove();
+                }
+                reposContainer.innerHTML = `<p class="message-feedback message-error md:col-span-2 xl:col-span-3">Error loading repositories: ${error.message}.</p>`;
             }
         }
 
-        // Sets up the intersection observer based on screen size
-        function initializeObserver() {
-            const scrollContainer = document.getElementById('repos-scroll-area');
-            const isDesktopView = getComputedStyle(scrollContainer).overflowY === 'auto';
-            if (repoObserver) repoObserver.disconnect();
-            repoObserver = new IntersectionObserver(observerCallback, {
-                root: isDesktopView ? scrollContainer : null,
-                threshold: 0.1
-            });
-        }
-
         window.onload = () => {
-            initializeObserver();
-            fetchGitHubRepos(githubUsername);
-            // Set the copyright year dynamically
+            const revealObserver = initializeRevealAnimations();
+            fetchGitHubRepos(githubUsername, revealObserver);
             document.getElementById('copyright-year').textContent = new Date().getFullYear();
         };
-        window.onresize = initializeObserver;
     </script>
 </body>
 </html>
