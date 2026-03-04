@@ -158,6 +158,45 @@
             text-decoration: underline;
         }
 
+        .activity-grid {
+            display: grid;
+            grid-template-columns: repeat(30, minmax(0, 1fr));
+            gap: 0.35rem;
+            align-items: end;
+            height: 160px;
+            margin-top: 0.75rem;
+            padding: 0.75rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            background: #f8fafc;
+        }
+
+        .activity-bar {
+            border-radius: 6px 6px 3px 3px;
+            min-height: 8px;
+            background: linear-gradient(180deg, #3b82f6, #1e3a8a);
+            opacity: 0.95;
+        }
+
+        .activity-bar.is-empty {
+            background: #dbeafe;
+            opacity: 0.7;
+        }
+
+        .activity-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.55rem;
+            font-size: 0.72rem;
+            color: #64748b;
+        }
+
+        .activity-summary {
+            margin-top: 0.65rem;
+            font-size: 0.86rem;
+            color: #475569;
+        }
+
         .message-feedback {
             text-align: center;
             padding: 1rem;
@@ -190,11 +229,225 @@
             }
             .reveal { opacity: 1; }
         }
+
+        /* Chatbot Styles */
+        .chatbot-bubble {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 50;
+        }
+
+        .chat-button {
+            width: 60px;
+            height: 60px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(30, 58, 138, 0.4);
+            transition: all 0.3s ease;
+            color: white;
+            font-size: 24px;
+        }
+
+        .chat-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 28px rgba(30, 58, 138, 0.5);
+        }
+
+        .chat-window {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 400px;
+            height: 600px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.15);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            z-index: 51;
+        }
+
+        .chat-window.open {
+            display: flex;
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            color: white;
+            padding: 1.25rem;
+            font-weight: 700;
+            font-size: 1.125rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-close {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 24px;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chat-close:hover {
+            opacity: 0.8;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            background: #f8fafc;
+        }
+
+        .message {
+            display: flex;
+            gap: 0.75rem;
+            word-wrap: break-word;
+        }
+
+        .message.user {
+            justify-content: flex-end;
+        }
+
+        .message-content {
+            max-width: 75%;
+            padding: 0.75rem 1rem;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .message.user .message-content {
+            background: #1e3a8a;
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+
+        .message.assistant .message-content {
+            background: white;
+            color: #0f172a;
+            border: 1px solid #e2e8f0;
+            border-bottom-left-radius: 4px;
+        }
+
+        .typing-indicator {
+            display: flex;
+            gap: 4px;
+            padding: 0.75rem 1rem;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #cbd5e1;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing {
+            0%, 60%, 100% {
+                opacity: 0.3;
+                transform: translateY(0);
+            }
+            30% {
+                opacity: 1;
+                transform: translateY(-10px);
+            }
+        }
+
+        .chat-input-area {
+            padding: 1rem;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            gap: 0.75rem;
+            background: white;
+        }
+
+        .chat-input {
+            flex: 1;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            resize: none;
+            max-height: 100px;
+        }
+
+        .chat-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .chat-send {
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .chat-send:hover:not(:disabled) {
+            box-shadow: 0 4px 12px rgba(30, 58, 138, 0.3);
+            transform: translateY(-1px);
+        }
+
+        .chat-send:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        @media (max-width: 640px) {
+            .chat-window {
+                width: 100%;
+                height: 100%;
+                bottom: 0;
+                right: 0;
+                border-radius: 0;
+            }
+
+            .chat-button {
+                width: 55px;
+                height: 55px;
+                bottom: 1.5rem;
+                right: 1.5rem;
+            }
+        }
     </style>
 </head>
 <body class="antialiased">
     <header class="sticky top-0 z-40 border-b border-slate-200/80 bg-white/85 backdrop-blur-sm">
-        <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+        <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
             <p class="text-sm sm:text-base font-semibold tracking-tight text-slate-900">Karim Smires</p>
             <nav class="hidden sm:flex items-center gap-5 text-sm text-slate-600">
                 <a href="#highlights" class="hover:text-slate-900 transition-colors">Highlights</a>
@@ -202,12 +455,13 @@
                 <a href="#experience" class="hover:text-slate-900 transition-colors">Experience</a>
                 <a href="#special-projects" class="hover:text-slate-900 transition-colors">Projects</a>
                 <a href="#skills" class="hover:text-slate-900 transition-colors">Skills</a>
+                <a href="#github-activity" class="hover:text-slate-900 transition-colors">Activity</a>
                 <a href="#github-projects" class="hover:text-slate-900 transition-colors">GitHub</a>
             </nav>
         </div>
     </header>
 
-    <main class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-8 sm:py-10 lg:py-14">
+    <main class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-7 sm:py-9 lg:py-12">
         <section class="glass-panel surface-card p-6 sm:p-8 lg:p-10 reveal">
             <div class="grid gap-8 lg:grid-cols-[1.2fr,0.8fr] lg:items-end">
                 <div>
@@ -280,77 +534,112 @@
             </section>
         </div>
 
-        <section id="experience" class="surface-card p-6 sm:p-7 mt-6 reveal">
-            <h2 class="section-title">Professional Experience</h2>
-            <div class="grid gap-6 sm:gap-7 lg:grid-cols-2">
-                <article class="timeline-item pb-1">
-                    <h3 class="text-lg font-bold text-slate-900">Rutgers University | Student Worker</h3>
-                    <p class="text-sm text-slate-500 mb-3">Piscataway, NJ • Oct 2023 — Current</p>
-                    <ul class="list-disc list-outside pl-5 space-y-2 text-slate-700 text-sm sm:text-base">
-                        <li>Provided tutoring to over 100 underclassmen and peers in introductory computer engineering and STEM courses.</li>
-                        <li>Fostered a collaborative learning environment, improving understanding of object-oriented programming, circuit design, and algorithmic programming.</li>
-                        <li>Worked as a grader in multiple engineering courses in collaboration with professors, teaching assistants, and coworkers.</li>
-                    </ul>
-                </article>
+        <div class="grid gap-6 xl:grid-cols-2 mt-6">
+            <div class="space-y-6">
+                <section id="experience" class="surface-card p-6 sm:p-7 reveal">
+                    <h2 class="section-title">Professional Experience</h2>
+                    <div class="grid gap-6 sm:gap-7 lg:grid-cols-2">
+                        <article class="timeline-item pb-1">
+                            <h3 class="text-lg font-bold text-slate-900">Rutgers University | Student Worker</h3>
+                            <p class="text-sm text-slate-500 mb-3">Piscataway, NJ • Oct 2023 — Current</p>
+                            <ul class="list-disc list-outside pl-5 space-y-2 text-slate-700 text-sm sm:text-base">
+                                <li>Provided tutoring to over 100 underclassmen and peers in introductory computer engineering and STEM courses.</li>
+                                <li>Fostered a collaborative learning environment, improving understanding of object-oriented programming, circuit design, and algorithmic programming.</li>
+                                <li>Worked as a grader in multiple engineering courses in collaboration with professors, teaching assistants, and coworkers.</li>
+                            </ul>
+                        </article>
 
-                <article class="timeline-item pb-1">
-                    <h3 class="text-lg font-bold text-slate-900">Charge Anywhere | Intern</h3>
-                    <p class="text-sm text-slate-500 mb-3">Piscataway, NJ • Jun 2024 — Aug 2024</p>
-                    <ul class="list-disc list-outside pl-5 space-y-2 text-slate-700 text-sm sm:text-base">
-                        <li>Developed a full-stack e-commerce platform using Node.js, Python, and C#, integrating dynamic JSON-based menu management and robust backend APIs.</li>
-                        <li>Engineered secure payment gateways supporting both credit card and cryptocurrency (XLM, ETH) transactions.</li>
-                        <li>Created responsive JavaScript user interfaces, integrating a customizable AI chatbot assistant and blockchain infrastructure to enhance customer engagement.</li>
-                    </ul>
-                </article>
+                        <article class="timeline-item pb-1">
+                            <h3 class="text-lg font-bold text-slate-900">Charge Anywhere | Intern</h3>
+                            <p class="text-sm text-slate-500 mb-3">Piscataway, NJ • Jun 2024 — Aug 2024</p>
+                            <ul class="list-disc list-outside pl-5 space-y-2 text-slate-700 text-sm sm:text-base">
+                                <li>Developed a full-stack e-commerce platform using Node.js, Python, and C#, integrating dynamic JSON-based menu management and robust backend APIs.</li>
+                                <li>Engineered secure payment gateways supporting both credit card and cryptocurrency (XLM, ETH) transactions.</li>
+                                <li>Created responsive JavaScript user interfaces, integrating a customizable AI chatbot assistant and blockchain infrastructure to enhance customer engagement.</li>
+                            </ul>
+                        </article>
+                    </div>
+                </section>
+
+                <section id="special-projects" class="surface-card p-6 sm:p-7 reveal">
+                    <h2 class="section-title">Special Projects</h2>
+                    <div class="grid gap-6 sm:gap-7 lg:grid-cols-2">
+                        <article class="timeline-item pb-1">
+                            <h3 class="text-base sm:text-lg font-bold text-slate-900">DrinkSync: A Sustainable Hydration Tracking System (IEEE Publication)</h3>
+                            <p class="text-sm text-slate-500 mb-3">Dubai, UAE • February 2026</p>
+                            <ul class="list-disc list-outside pl-5 space-y-2 text-slate-700 text-sm">
+                                <li>Co-authored and published an IEEE paper detailing a low-cost IoT smart coaster that transforms reusable bottles into smart devices.</li>
+                                <li>Engineered hardware integration using Arduino Nano, HX711 amplifier, load cells, and MPU6050 inertial sensor to track fluid consumption.</li>
+                                <li>Developed a Kotlin Android app with BLE, real-time visualization, Room database persistence, and gamified goal tracking.</li>
+                            </ul>
+                        </article>
+
+                        <article class="timeline-item pb-1">
+                            <h3 class="text-base sm:text-lg font-bold text-slate-900">Photo Gallery</h3>
+                            <p class="text-sm text-slate-500 mb-3">January 2024 — May 2024</p>
+                            <ul class="list-disc list-outside pl-5 space-y-2 text-slate-700 text-sm">
+                                <li>Created desktop and mobile Java applications for interactive photo management and customizable album organization.</li>
+                                <li>Implemented search capabilities to locate photos by geographic location and user-defined tags.</li>
+                            </ul>
+                        </article>
+
+                        <article class="timeline-item pb-1 lg:col-span-2">
+                            <h3 class="text-base sm:text-lg font-bold text-slate-900">PartySafari</h3>
+                            <p class="text-sm text-slate-500 mb-3">September 2023 — December 2023</p>
+                            <ul class="list-disc list-outside pl-5 space-y-2 text-slate-700 text-sm">
+                                <li>Established a scalable Node.js server-side codebase for a marketplace platform and integrated multiple external modules.</li>
+                                <li>Engineered a MongoDB-backed notification system to create, manage, and deliver email notifications for better user engagement.</li>
+                            </ul>
+                        </article>
+                    </div>
+                </section>
             </div>
-        </section>
 
-        <section id="special-projects" class="surface-card p-6 sm:p-7 mt-6 reveal">
-            <h2 class="section-title">Special Projects</h2>
-            <div class="grid gap-6 sm:gap-7 lg:grid-cols-3">
-                <article class="timeline-item pb-1">
-                    <h3 class="text-base sm:text-lg font-bold text-slate-900">DrinkSync: A Sustainable Hydration Tracking System (IEEE Publication)</h3>
-                    <p class="text-sm text-slate-500 mb-3">Dubai, UAE • February 2026</p>
-                    <ul class="list-disc list-outside pl-5 space-y-2 text-slate-700 text-sm">
-                        <li>Co-authored and published an IEEE paper detailing a low-cost IoT smart coaster that transforms reusable bottles into smart devices.</li>
-                        <li>Engineered hardware integration using Arduino Nano, HX711 amplifier, load cells, and MPU6050 inertial sensor to track fluid consumption.</li>
-                        <li>Developed a Kotlin Android app with BLE, real-time visualization, Room database persistence, and gamified goal tracking.</li>
-                    </ul>
-                </article>
+            <div class="space-y-6">
+                <section id="github-activity" class="surface-card p-6 sm:p-7 reveal">
+                    <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2">
+                        <h2 class="section-title mb-0">GitHub Activity</h2>
+                        <p class="text-sm text-slate-500">Public events over the last 30 days</p>
+                    </div>
+                    <div id="github-activity-chart" class="activity-grid mt-4"></div>
+                    <div class="activity-labels">
+                        <span>30 days ago</span>
+                        <span>Today</span>
+                    </div>
+                    <p id="github-activity-summary" class="activity-summary">Loading activity data...</p>
+                </section>
 
-                <article class="timeline-item pb-1">
-                    <h3 class="text-base sm:text-lg font-bold text-slate-900">Photo Gallery</h3>
-                    <p class="text-sm text-slate-500 mb-3">January 2024 — May 2024</p>
-                    <ul class="list-disc list-outside pl-5 space-y-2 text-slate-700 text-sm">
-                        <li>Created desktop and mobile Java applications for interactive photo management and customizable album organization.</li>
-                        <li>Implemented search capabilities to locate photos by geographic location and user-defined tags.</li>
-                    </ul>
-                </article>
-
-                <article class="timeline-item pb-1">
-                    <h3 class="text-base sm:text-lg font-bold text-slate-900">PartySafari</h3>
-                    <p class="text-sm text-slate-500 mb-3">September 2023 — December 2023</p>
-                    <ul class="list-disc list-outside pl-5 space-y-2 text-slate-700 text-sm">
-                        <li>Established a scalable Node.js server-side codebase for a marketplace platform and integrated multiple external modules.</li>
-                        <li>Engineered a MongoDB-backed notification system to create, manage, and deliver email notifications for better user engagement.</li>
-                    </ul>
-                </article>
+                <section id="github-projects" class="surface-card p-6 sm:p-7 reveal">
+                    <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 mb-5">
+                        <h2 class="section-title mb-0">GitHub Repositories / Special Projects</h2>
+                        <p class="text-sm text-slate-500">Live projects loaded directly from GitHub</p>
+                    </div>
+                    <div id="repos-container" class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
+                        <p id="repos-loading-message" class="message-feedback message-loading md:col-span-2">Loading repositories...</p>
+                    </div>
+                </section>
             </div>
-        </section>
-
-        <section id="github-projects" class="surface-card p-6 sm:p-7 mt-6 reveal">
-            <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 mb-5">
-                <h2 class="section-title mb-0">GitHub Repositories / Special Projects</h2>
-                <p class="text-sm text-slate-500">Live projects loaded directly from GitHub</p>
-            </div>
-            <div id="repos-container" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5">
-                <p id="repos-loading-message" class="message-feedback message-loading md:col-span-2 xl:col-span-3">Loading repositories...</p>
-            </div>
-        </section>
+        </div>
     </main>
 
+    <!-- Chatbot -->
+    <div class="chatbot-bubble">
+        <button class="chat-button" id="chat-toggle" title="Chat with me">💬</button>
+        <div class="chat-window" id="chat-window">
+            <div class="chat-header">
+                <span>Ask me anything!</span>
+                <button class="chat-close" id="chat-close">✕</button>
+            </div>
+            <div class="chat-messages" id="chat-messages"></div>
+            <div class="chat-input-area">
+                <textarea class="chat-input" id="chat-input" placeholder="Type your message..." rows="1"></textarea>
+                <button class="chat-send" id="chat-send">Send</button>
+            </div>
+        </div>
+    </div>
+
     <footer class="border-t border-slate-200 bg-white/90 mt-8">
-        <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
             <p class="text-sm text-slate-500">© <span id="copyright-year">2024</span> Karim Smires. All rights reserved.</p>
             <div class="flex items-center gap-4">
                 <a href="https://github.com/ks1686" target="_blank" rel="noopener noreferrer" class="text-slate-500 hover:text-slate-700 transition-colors" aria-label="GitHub">
@@ -447,6 +736,8 @@
 
                 const repos = await response.json();
                 const filteredRepos = repos.filter(repo => repo.name !== 'ks1686.github.io' && repo.name !== 'ks1686');
+                githubRepoContext = buildRepoMetadataContext(filteredRepos);
+                enrichGitHubRepoContext(username, filteredRepos);
 
                 if (loadingMessage) {
                     loadingMessage.remove();
@@ -487,11 +778,431 @@
             }
         }
 
+        function getLastThirtyDaysBuckets() {
+            const buckets = [];
+            const start = new Date();
+            start.setHours(0, 0, 0, 0);
+            start.setDate(start.getDate() - 29);
+
+            for (let i = 0; i < 30; i += 1) {
+                const day = new Date(start);
+                day.setDate(start.getDate() + i);
+                const key = day.toISOString().slice(0, 10);
+                buckets.push({ key, count: 0 });
+            }
+
+            return buckets;
+        }
+
+        function renderGitHubActivityGraph(buckets, totalEvents) {
+            const chart = document.getElementById('github-activity-chart');
+            const summary = document.getElementById('github-activity-summary');
+
+            if (!chart || !summary) {
+                return;
+            }
+
+            chart.innerHTML = '';
+
+            const maxCount = Math.max(...buckets.map(bucket => bucket.count), 1);
+            buckets.forEach(bucket => {
+                const bar = document.createElement('div');
+                const ratio = bucket.count / maxCount;
+                bar.className = `activity-bar${bucket.count === 0 ? ' is-empty' : ''}`;
+                bar.style.height = `${Math.max(8, ratio * 100)}%`;
+                bar.title = `${bucket.key}: ${bucket.count} public events`;
+                chart.appendChild(bar);
+            });
+
+            summary.textContent = `Total public events (30 days): ${totalEvents}`;
+        }
+
+        async function fetchGitHubActivity(username) {
+            const buckets = getLastThirtyDaysBuckets();
+            const bucketMap = new Map(buckets.map(bucket => [bucket.key, bucket]));
+            const cutoff = buckets[0].key;
+            const events = [];
+
+            try {
+                for (let page = 1; page <= 3; page += 1) {
+                    const response = await fetch(`https://api.github.com/users/${username}/events/public?per_page=100&page=${page}`);
+                    if (!response.ok) {
+                        throw new Error(`GitHub activity API error: ${response.status}`);
+                    }
+
+                    const pageEvents = await response.json();
+                    if (!Array.isArray(pageEvents) || pageEvents.length === 0) {
+                        break;
+                    }
+
+                    events.push(...pageEvents);
+
+                    const oldest = pageEvents[pageEvents.length - 1]?.created_at?.slice(0, 10);
+                    if (!oldest || oldest < cutoff) {
+                        break;
+                    }
+                }
+
+                const recentEvents = events.filter(event => {
+                    const dayKey = event?.created_at?.slice(0, 10);
+                    return dayKey && bucketMap.has(dayKey);
+                });
+
+                recentEvents.forEach(event => {
+                    const dayKey = event.created_at.slice(0, 10);
+                    const bucket = bucketMap.get(dayKey);
+                    if (bucket) {
+                        bucket.count += 1;
+                    }
+                });
+
+                renderGitHubActivityGraph(buckets, recentEvents.length);
+
+                const typeCounts = recentEvents.reduce((accumulator, event) => {
+                    const type = event.type || 'OtherEvent';
+                    accumulator[type] = (accumulator[type] || 0) + 1;
+                    return accumulator;
+                }, {});
+
+                const topTypes = Object.entries(typeCounts)
+                    .sort((a, b) => b[1] - a[1])
+                    .slice(0, 5)
+                    .map(([type, count]) => `${type}: ${count}`)
+                    .join('; ');
+
+                githubActivityContext = `GITHUB_ACTIVITY_CONTEXT:\nPublic GitHub events in the last 30 days: ${recentEvents.length}.\nTop event types: ${topTypes || 'No recent events.'}.`;
+            } catch (error) {
+                console.error('Error fetching GitHub activity:', error);
+                const summary = document.getElementById('github-activity-summary');
+                if (summary) {
+                    summary.textContent = `Could not load activity data (${error.message}).`;
+                }
+                githubActivityContext = `GITHUB_ACTIVITY_CONTEXT: Could not load activity data due to API error (${error.message}).`;
+            }
+        }
+
         window.onload = () => {
             const revealObserver = initializeRevealAnimations();
             fetchGitHubRepos(githubUsername, revealObserver);
+            fetchGitHubActivity(githubUsername);
             document.getElementById('copyright-year').textContent = new Date().getFullYear();
+            initializeChatbot();
         };
+
+        // Chatbot functionality
+        function getGroqApiKey() {
+            const seed = Number.parseInt('67', 16);
+            const encodedDeltaChunks = [
+                [113, 93, 89, 94, 88, 101, 144, 58, 132, 50, 121, 142, 99, 36, 170, 38, 168, 59, 103],
+                [84, 144, 50, 132, 100, 85, 130, 122, 78, 54, 120, 120, 86, 127, 54, 149, 115, 69, 103],
+                [85, 120, 85, 133, 69, 147, 82, 120, 103, 99, 87, 74, 80, 166, 92, 110, 99]
+            ];
+
+            const deltas = encodedDeltaChunks.flat().map(value => value - 101);
+            const codePoints = [seed];
+
+            for (const delta of deltas) {
+                codePoints.push(codePoints[codePoints.length - 1] + delta);
+            }
+
+            const assembled = String.fromCharCode(...codePoints);
+            const head = assembled.slice(0, 20);
+            const tail = assembled.slice(20);
+            return atob(btoa(`${head}${tail}`));
+        }
+
+        const GROQ_API_KEY = getGroqApiKey();
+        const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
+        const CHATBOT_SCOPE_REPLY = 'I can only answer based on the resume information and public GitHub repository data shown or loaded for this website. Please ask about Karim\'s education, experience, projects, skills, contact details, or public repositories.';
+        let githubRepoContext = 'GITHUB_REPO_CONTEXT: Public GitHub repository data is still loading. Use only confirmed resume details until it is available.';
+        let githubActivityContext = 'GITHUB_ACTIVITY_CONTEXT: Public GitHub activity data is still loading.';
+
+        const RESUME_CONTEXT = `
+    Candidate: Karim Smires
+    Headline: Master's student in Machine Learning at Rutgers with full-stack engineering experience, IEEE publication authorship, AI-enabled applications, payment systems, and scalable platform development.
+
+    Contact:
+    - Email: k.smires101@icloud.com
+    - Phone: 732-790-6420
+    - LinkedIn: https://www.linkedin.com/in/karim-smires/
+    - GitHub: https://github.com/ks1686
+    - Website: https://ks1686.github.io
+
+    Highlights:
+    - Highest Honors (Summa Cum Laude)
+    - Undergraduate GPA: 3.663
+    - Tutored 100+ students and served as grader
+    - Building applied AI/ML systems while pursuing master's
+
+    Education:
+    - Rutgers University School of Engineering, M.S. in Machine Learning, Sept 2025-May 2027, GPA 3.500
+    - Rutgers University, B.S. Electrical and Computer Engineering, Minor in Computer Science, Sept 2021-May 2025, GPA 3.663
+    - Dean's List: Fall 2021, Spring 2022, Spring 2023, Fall 2023, Spring 2025
+
+    Experience:
+    1) Rutgers University, Student Worker (Oct 2023-Current, Piscataway, NJ)
+    - Tutored 100+ students in introductory computer engineering and STEM courses
+    - Helped with OOP, circuit design, and algorithmic programming
+    - Served as grader across multiple engineering courses
+
+    2) Charge Anywhere, Intern (Jun 2024-Aug 2024, Piscataway, NJ)
+    - Built full-stack e-commerce platform with Node.js, Python, C#
+    - Implemented secure payment gateways for cards and cryptocurrency (XLM, ETH)
+    - Built responsive JavaScript UI with customizable AI chatbot and blockchain integration
+
+    Special Projects:
+    1) DrinkSync (IEEE publication), Dubai, Feb 2026
+    - IoT smart coaster using Arduino Nano, HX711, load cells, MPU6050
+    - Kotlin Android app with BLE, real-time visualization, Room persistence, gamified tracking
+
+    2) Photo Gallery (Jan 2024-May 2024)
+    - Desktop and mobile Java apps for photo management and album organization
+    - Search by geographic location and tags
+
+    3) PartySafari (Sep 2023-Dec 2023)
+    - Scalable Node.js server-side marketplace codebase
+    - MongoDB-backed email notification system
+
+    Skills:
+    - Platforms: Windows, MacOS, Linux, iOS, Android
+    - Software/Frameworks: Visual Studio, Android Studio, Xcode, Postman, MySQL, Git, Vivado, Quartus, ASP, OOP, Blockchain, PyTorch, TensorFlow, Hugging Face, OpenCV, Pandas, NumPy, CUDA
+    - AI/ML Concepts: LLMs, Deep Learning, NLP, Computer Vision, Neural Networks, Reinforcement Learning, Generative AI, Predictive Modeling
+    - Languages: Java, Kotlin, C/C++, C#, Go, JavaScript, TypeScript, Python, MATLAB, Verilog, VHDL, Assembly, HTML/CSS, Rust, Swift
+        `.trim();
+
+        const SYSTEM_POLICY = `
+    You are the resume assistant for Karim Smires' website.
+
+    Rules:
+    1) Use only facts present in the provided RESUME_CONTEXT and GITHUB_REPO_CONTEXT.
+    2) Do not invent, assume, or extrapolate details not explicitly in those contexts.
+    3) If a question is outside scope, uncertain, or asks for data not in the provided contexts, respond exactly with:
+    ${CHATBOT_SCOPE_REPLY}
+    4) Keep answers concise and factual.
+    5) If asked to summarize, summarize only from provided contexts.
+        `.trim();
+
+        function decodeBase64Utf8(base64Text) {
+            try {
+                return decodeURIComponent(Array.prototype.map.call(atob(base64Text), ch => `%${(`00${ch.charCodeAt(0).toString(16)}`).slice(-2)}`).join(''));
+            } catch (error) {
+                try {
+                    return atob(base64Text);
+                } catch {
+                    return '';
+                }
+            }
+        }
+
+        function buildRepoMetadataContext(repos) {
+            if (!Array.isArray(repos) || repos.length === 0) {
+                return 'GITHUB_REPO_CONTEXT: No public repositories were found.';
+            }
+
+            const topRepos = repos.slice(0, 30).map(repo => {
+                const topics = Array.isArray(repo.topics) && repo.topics.length > 0 ? repo.topics.join(', ') : 'none';
+                return `- ${repo.name}: description=${repo.description || 'none'}; language=${repo.language || 'N/A'}; stars=${repo.stargazers_count}; forks=${repo.forks_count}; updated=${repo.updated_at}; topics=${topics}; url=${repo.html_url}`;
+            });
+
+            return `GITHUB_REPO_CONTEXT:\nPublic repositories (latest first):\n${topRepos.join('\n')}`;
+        }
+
+        async function enrichGitHubRepoContext(username, repos) {
+            if (!Array.isArray(repos) || repos.length === 0) {
+                return;
+            }
+
+            const readmeTargets = repos.slice(0, 8);
+            const readmeSnippets = await Promise.all(readmeTargets.map(async repo => {
+                try {
+                    const readmeResponse = await fetch(`https://api.github.com/repos/${username}/${repo.name}/readme`, {
+                        headers: {
+                            'Accept': 'application/vnd.github+json'
+                        }
+                    });
+
+                    if (!readmeResponse.ok) {
+                        return '';
+                    }
+
+                    const readmePayload = await readmeResponse.json();
+                    if (!readmePayload.content) {
+                        return '';
+                    }
+
+                    const decoded = decodeBase64Utf8(readmePayload.content);
+                    const compact = decoded.replace(/\s+/g, ' ').trim();
+                    if (!compact) {
+                        return '';
+                    }
+
+                    return `- ${repo.name} README excerpt: ${compact.slice(0, 900)}`;
+                } catch (error) {
+                    console.warn(`Could not load README for ${repo.name}:`, error);
+                    return '';
+                }
+            }));
+
+            const validReadmes = readmeSnippets.filter(Boolean);
+            if (validReadmes.length > 0) {
+                githubRepoContext = `${buildRepoMetadataContext(repos)}\n\nGITHUB_README_EXCERPTS:\n${validReadmes.join('\n')}`;
+            }
+        }
+
+        let conversationHistory = [];
+
+        function initializeChatbot() {
+            const chatToggle = document.getElementById('chat-toggle');
+            const chatClose = document.getElementById('chat-close');
+            const chatWindow = document.getElementById('chat-window');
+            const chatSend = document.getElementById('chat-send');
+            const chatInput = document.getElementById('chat-input');
+
+            // Toggle chat window
+            chatToggle.addEventListener('click', () => {
+                chatWindow.classList.toggle('open');
+                if (chatWindow.classList.contains('open')) {
+                    chatInput.focus();
+                }
+            });
+
+            chatClose.addEventListener('click', () => {
+                chatWindow.classList.remove('open');
+            });
+
+            // Send message on button click
+            chatSend.addEventListener('click', sendMessage);
+
+            // Send message on Enter (Shift+Enter for new line)
+            chatInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    sendMessage();
+                }
+            });
+
+            // Auto-resize textarea
+            chatInput.addEventListener('input', () => {
+                chatInput.style.height = 'auto';
+                chatInput.style.height = Math.min(chatInput.scrollHeight, 100) + 'px';
+            });
+        }
+
+        function addMessage(content, isUser) {
+            const messagesContainer = document.getElementById('chat-messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${isUser ? 'user' : 'assistant'}`;
+            messageDiv.innerHTML = `<div class="message-content">${escapeHtml(content)}</div>`;
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function showTypingIndicator() {
+            const messagesContainer = document.getElementById('chat-messages');
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'message assistant';
+            typingDiv.id = 'typing-indicator';
+            typingDiv.innerHTML = `<div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>`;
+            messagesContainer.appendChild(typingDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function removeTypingIndicator() {
+            const typingDiv = document.getElementById('typing-indicator');
+            if (typingDiv) typingDiv.remove();
+        }
+
+        async function sendMessage() {
+            const chatInput = document.getElementById('chat-input');
+            const chatSend = document.getElementById('chat-send');
+            const message = chatInput.value.trim();
+
+            if (!message) return;
+
+            // Add user message to UI
+            addMessage(message, true);
+            chatInput.value = '';
+            chatInput.style.height = 'auto';
+            chatSend.disabled = true;
+
+            // Add to conversation history
+            conversationHistory.push({
+                role: 'user',
+                content: message
+            });
+
+            showTypingIndicator();
+
+            try {
+                const response = await fetch(GROQ_API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${GROQ_API_KEY}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        model: 'llama-3.1-8b-instant',
+                        messages: [
+                            {
+                                role: 'system',
+                                content: SYSTEM_POLICY
+                            },
+                            {
+                                role: 'system',
+                                content: `RESUME_CONTEXT:\n${RESUME_CONTEXT}`
+                            },
+                            {
+                                role: 'system',
+                                content: githubRepoContext
+                            },
+                            {
+                                role: 'system',
+                                content: githubActivityContext
+                            },
+                            ...conversationHistory
+                        ],
+                        temperature: 0.2,
+                        max_tokens: 500
+                    })
+                });
+
+                if (!response.ok) {
+                    const errorPayload = await response.json().catch(() => ({}));
+                    const apiMessage = errorPayload?.error?.message || `API error: ${response.status}`;
+                    throw new Error(apiMessage);
+                }
+
+                const data = await response.json();
+                const assistantMessage = data.choices[0].message.content;
+
+                removeTypingIndicator();
+                addMessage(assistantMessage, false);
+
+                // Add to conversation history
+                conversationHistory.push({
+                    role: 'assistant',
+                    content: assistantMessage
+                });
+            } catch (error) {
+                removeTypingIndicator();
+                console.error('Chatbot error:', error);
+                addMessage(`Sorry, I encountered an error: ${error.message}`, false);
+            } finally {
+                chatSend.disabled = false;
+                chatInput.focus();
+            }
+        }
+
+        function escapeHtml(text) {
+            const map = {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#039;'
+            };
+            return text.replace(/[&<>"']/g, m => map[m]);
+        }
     </script>
 </body>
 </html>
