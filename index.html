@@ -564,31 +564,7 @@
             }
         }
 
-        .hero-animate .hero-eyebrow,
-        .hero-animate h1,
-        .hero-animate .hero-lead,
-        .hero-animate .hero-support,
-        .hero-animate .hero-actions,
-        .hero-animate .hero-meta {
-            animation: heroRise 0.75s ease both;
-        }
-
-        .hero-animate h1 { animation-delay: 0.08s; }
-        .hero-animate .hero-lead { animation-delay: 0.16s; }
-        .hero-animate .hero-support { animation-delay: 0.24s; }
-        .hero-animate .hero-actions { animation-delay: 0.32s; }
-        .hero-animate .hero-meta { animation-delay: 0.4s; }
-
-        @keyframes heroRise {
-            from {
-                opacity: 0;
-                transform: translateY(14px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+        /* Hero motion removed: content must be immediately readable */
 
         /* —— Chat —— */
         .chatbot-bubble {
@@ -793,21 +769,6 @@
 
         @media (prefers-reduced-motion: reduce) {
             html { scroll-behavior: auto; }
-            .reveal {
-                opacity: 1;
-                transform: none;
-                transition: none;
-            }
-            .hero-animate .hero-eyebrow,
-            .hero-animate h1,
-            .hero-animate .hero-lead,
-            .hero-animate .hero-support,
-            .hero-animate .hero-actions,
-            .hero-animate .hero-meta {
-                opacity: 1;
-                transform: none;
-                animation: none;
-            }
             .btn:hover,
             .project:hover,
             .chat-button:hover {
