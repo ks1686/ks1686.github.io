@@ -547,14 +547,21 @@
 
         /* —— Motion —— */
         .reveal {
-            opacity: 0;
-            transform: translateY(16px);
-            transition: opacity 0.7s ease, transform 0.7s ease;
+            opacity: 1;
+            transform: none;
         }
 
-        .reveal.is-visible {
-            opacity: 1;
-            transform: translateY(0);
+        @media (prefers-reduced-motion: no-preference) {
+            .reveal {
+                opacity: 0;
+                transform: translateY(16px);
+                transition: opacity 0.7s ease, transform 0.7s ease;
+            }
+
+            .reveal.is-visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .hero-animate .hero-eyebrow,
@@ -563,9 +570,7 @@
         .hero-animate .hero-support,
         .hero-animate .hero-actions,
         .hero-animate .hero-meta {
-            opacity: 0;
-            transform: translateY(14px);
-            animation: heroRise 0.75s ease forwards;
+            animation: heroRise 0.75s ease both;
         }
 
         .hero-animate h1 { animation-delay: 0.08s; }
@@ -575,6 +580,10 @@
         .hero-animate .hero-meta { animation-delay: 0.4s; }
 
         @keyframes heroRise {
+            from {
+                opacity: 0;
+                transform: translateY(14px);
+            }
             to {
                 opacity: 1;
                 transform: translateY(0);
