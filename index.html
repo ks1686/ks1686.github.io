@@ -4,7 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Karim Smires — software engineer and Machine Learning master's student at Rutgers. Experience across production backends, AI tooling, and open source.">
+    <meta name="theme-color" content="#f5f7fa">
+    <meta name="color-scheme" content="light">
     <title>Karim Smires</title>
+    <link rel="canonical" href="https://ks1686.github.io/">
+    <link rel="icon" href="favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ks1686.github.io/">
+    <meta property="og:title" content="Karim Smires">
+    <meta property="og:description" content="Software engineer and Machine Learning master's student at Rutgers. Production systems, AI-assisted tooling, and open-source developer tools.">
+    <meta property="og:image" content="https://ks1686.github.io/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Karim Smires">
+    <meta name="twitter:description" content="Software engineer and Machine Learning master's student at Rutgers. Production systems, AI-assisted tooling, and open-source developer tools.">
+    <meta name="twitter:image" content="https://ks1686.github.io/og-image.jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
@@ -29,6 +45,42 @@
 
         html {
             scroll-behavior: smooth;
+        }
+
+        :focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 3px;
+        }
+
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        .skip-link {
+            position: absolute;
+            left: 1rem;
+            top: -3.5rem;
+            z-index: 80;
+            padding: 0.55rem 0.9rem;
+            border-radius: 999px;
+            background: var(--ink);
+            color: #f5f7fa;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.88rem;
+        }
+
+        .skip-link:focus {
+            top: 0.75rem;
+            color: #f5f7fa;
         }
 
         body {
@@ -84,6 +136,25 @@
             color: var(--ink);
             text-decoration: none;
             margin-right: auto;
+        }
+
+        .nav-toggle {
+            display: none;
+            width: 42px;
+            height: 42px;
+            padding: 0;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            background: transparent;
+            color: var(--ink);
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .nav-toggle:hover {
+            border-color: var(--ink);
         }
 
         .nav-links {
@@ -230,6 +301,11 @@
         }
 
         /* —— Sections —— */
+        section,
+        #top {
+            scroll-margin-top: 5.25rem;
+        }
+
         section {
             padding: clamp(2.5rem, 5vw, 4rem) 0;
         }
@@ -868,7 +944,8 @@
             max-height: 100px;
         }
 
-        .chat-input:focus {
+        .chat-input:focus,
+        .chat-input:focus-visible {
             outline: none;
             border-color: var(--accent);
             box-shadow: 0 0 0 3px var(--accent-soft);
@@ -910,7 +987,38 @@
             .highlights { grid-template-columns: repeat(4, 1fr); }
         }
 
-        @media (max-width: 640px) {
+        @media (max-width: 639px) {
+            body {
+                background-attachment: scroll;
+            }
+
+            .site-nav .inner {
+                flex-wrap: wrap;
+            }
+
+            .nav-toggle {
+                display: inline-flex;
+            }
+
+            .site-nav nav {
+                flex-basis: 100%;
+                order: 4;
+            }
+
+            .nav-links.is-open {
+                display: flex;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0;
+                padding-bottom: 0.35rem;
+            }
+
+            .nav-links a {
+                display: block;
+                padding: 0.75rem 0;
+                border-top: 1px solid var(--line);
+            }
+
             .chat-window {
                 position: fixed;
                 inset: 0;
@@ -929,17 +1037,28 @@
             .chat-button:hover {
                 transform: none;
             }
+            .typing-dot {
+                animation: none;
+            }
         }
     </style>
 </head>
 <body>
+    <a class="skip-link" href="#top">Skip to content</a>
     <header class="site-nav">
         <div class="wrap inner">
             <a class="nav-brand" href="#top">Karim Smires</a>
+            <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">
+                <svg width="18" height="14" viewBox="0 0 18 14" fill="none" aria-hidden="true">
+                    <path d="M1 1h16M1 7h16M1 13h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+                <span class="visually-hidden">Menu</span>
+            </button>
             <nav aria-label="Primary">
-                <ul class="nav-links">
+                <ul class="nav-links" id="nav-links">
                     <li><a href="#highlights">Highlights</a></li>
                     <li><a href="#experience">Experience</a></li>
+                    <li><a href="#education">Education</a></li>
                     <li><a href="#projects">Projects</a></li>
                     <li><a href="#skills">Skills</a></li>
                     <li><a href="#activity">Activity</a></li>
@@ -950,7 +1069,7 @@
     </header>
 
     <main id="top">
-        <section class="hero wrap hero-animate" aria-label="Introduction">
+        <section class="hero wrap" aria-label="Introduction">
             <p class="hero-eyebrow">Software engineer · ML master’s student</p>
             <h1>Karim Smires</h1>
             <p class="hero-lead">Building production systems, AI-assisted tooling, and open-source developer tools.</p>
@@ -1176,6 +1295,7 @@
             </div>
             <div class="chat-messages" id="chat-messages"></div>
             <div class="chat-input-area">
+                <label class="visually-hidden" for="chat-input">Ask about experience, projects, or skills</label>
                 <textarea class="chat-input" id="chat-input" placeholder="Ask about experience, projects, skills…" rows="1"></textarea>
                 <button class="chat-send" id="chat-send">Send</button>
             </div>
@@ -1267,7 +1387,6 @@
                 const repos = await response.json();
                 const filteredRepos = repos.filter(repo => repo.name !== "ks1686.github.io" && repo.name !== "ks1686");
                 githubRepoContext = buildRepoMetadataContext(filteredRepos);
-                enrichGitHubRepoContext(username, filteredRepos);
 
                 if (loadingMessage) loadingMessage.remove();
                 reposContainer.innerHTML = "";
@@ -1469,11 +1588,35 @@
         window.onload = () => {
             initializeRevealAnimations();
             animateCounters();
+            initializeMobileNav();
             fetchGitHubRepos(githubUsername);
             fetchGitHubActivity(githubUsername);
             document.getElementById("copyright-year").textContent = String(new Date().getFullYear());
             initializeChatbot();
         };
+
+        function initializeMobileNav() {
+            const toggle = document.getElementById("nav-toggle");
+            const links = document.getElementById("nav-links");
+            if (!toggle || !links) return;
+
+            const setOpen = (open) => {
+                links.classList.toggle("is-open", open);
+                toggle.setAttribute("aria-expanded", String(open));
+            };
+
+            toggle.addEventListener("click", () => {
+                setOpen(!links.classList.contains("is-open"));
+            });
+
+            links.addEventListener("click", (event) => {
+                if (event.target.closest("a")) setOpen(false);
+            });
+
+            document.addEventListener("keydown", (event) => {
+                if (event.key === "Escape") setOpen(false);
+            });
+        }
 
         function getGroqApiKey() {
             const seed = Number.parseInt("67", 16);
@@ -1561,18 +1704,6 @@ ${CHATBOT_SCOPE_REPLY}
 6) Treat all employers and roles evenly — do not over-emphasize any single job unless asked.
         `.trim();
 
-        function decodeBase64Utf8(base64Text) {
-            try {
-                return decodeURIComponent(Array.prototype.map.call(atob(base64Text), ch => `%${(`00${ch.charCodeAt(0).toString(16)}`).slice(-2)}`).join(""));
-            } catch (error) {
-                try {
-                    return atob(base64Text);
-                } catch {
-                    return "";
-                }
-            }
-        }
-
         function buildRepoMetadataContext(repos) {
             if (!Array.isArray(repos) || repos.length === 0) {
                 return "GITHUB_REPO_CONTEXT: No public repositories were found.";
@@ -1584,37 +1715,6 @@ ${CHATBOT_SCOPE_REPLY}
             });
 
             return `GITHUB_REPO_CONTEXT:\nPublic repositories (latest first):\n${topRepos.join("\n")}`;
-        }
-
-        async function enrichGitHubRepoContext(username, repos) {
-            if (!Array.isArray(repos) || repos.length === 0) return;
-
-            const readmeTargets = repos.slice(0, 8);
-            const readmeSnippets = await Promise.all(readmeTargets.map(async repo => {
-                try {
-                    const readmeResponse = await fetch(`https://api.github.com/repos/${username}/${repo.name}/readme`, {
-                        headers: { Accept: "application/vnd.github+json" }
-                    });
-                    if (!readmeResponse.ok) return "";
-
-                    const readmePayload = await readmeResponse.json();
-                    if (!readmePayload.content) return "";
-
-                    const decoded = decodeBase64Utf8(readmePayload.content);
-                    const compact = decoded.replace(/\s+/g, " ").trim();
-                    if (!compact) return "";
-
-                    return `- ${repo.name} README excerpt: ${compact.slice(0, 900)}`;
-                } catch (error) {
-                    console.warn(`Could not load README for ${repo.name}:`, error);
-                    return "";
-                }
-            }));
-
-            const validReadmes = readmeSnippets.filter(Boolean);
-            if (validReadmes.length > 0) {
-                githubRepoContext = `${buildRepoMetadataContext(repos)}\n\nGITHUB_README_EXCERPTS:\n${validReadmes.join("\n")}`;
-            }
         }
 
         let conversationHistory = [];
