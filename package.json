@@ -1,0 +1,12 @@
+{
+  "name": "ks1686.github.io",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "playwright test",
+    "test:static": "bun tests/static.test.ts"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.62.1"
+  }
+}
