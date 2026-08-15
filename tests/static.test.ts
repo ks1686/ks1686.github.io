@@ -29,5 +29,7 @@ assert(!html.includes("decodeBase64Utf8"), "README decoder should be gone");
 assert(!html.includes("/readme"), "page should not fetch GitHub READMEs");
 assert(!html.includes("Resume_Karim_Smires_2025.pdf"), "HTML should not link the 2025 PDF");
 assert(html.includes("Resume_Karim_Smires_2026.pdf"), "HTML should link the 2026 PDF");
+assert(html.includes('model: "openai/gpt-oss-20b"'), "chat should use Groq gpt-oss-20b");
+assert(!html.includes("llama-3.1-8b-instant"), "deprecated Groq llama model should be gone");
 
 console.log("static site checks passed");
